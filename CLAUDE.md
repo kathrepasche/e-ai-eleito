@@ -45,9 +45,8 @@ Público: qualquer eleitor, inclusive leigos em política (teste de clareza: alg
   - Muitas votações da Câmara são simbólicas (sem voto individual) e alguns registros ("Alteração do Regime de Tramitação") dão 404 no detalhe; ambos saem com `nominal: false`.
   - O Senado usa votos como `P-NRV` (presente, não votou) e `Presidente (art. 51 RISF)`; votações secretas não têm voto individual.
   - Na Câmara o `dataFim` é exclusivo; o coletor soma um dia.
-  - **"Faltou":** a Câmara só lista quem votou. O coletor completa os 513 cruzando com os deputados em exercício na data e com a presença na sessão. Valores: `nao_votou` (estava na sessão e não votou), `falta` (não registrou presença). A API da Câmara não informa ausência justificada, então `falta` ali significa só "não registrou presença".
-  - No Senado vêm os 81: `NCom` → `falta`; `MIS`, `AP`, `LS`, `LP`… → `ausencia_justificada` (motivo em `voto_oficial`).
-  - **Decisão pendente com a Kathleen:** como o app mostra `nao_votou` e `ausencia_justificada` (o protótipo só tem sim, não, abstenção e falta).
+  - **"Faltou":** a Câmara só lista quem votou. O coletor completa os 513 cruzando com os deputados em exercício na data e com a presença na sessão. No Senado vêm os 81.
+  - **Decisão (Kathleen, 23/11/2026): tudo que não é voto aparece como "faltou"** (`voto = "falta"`). O detalhe fica em `falta_detalhe`, só para transparência: `nao_compareceu` (Câmara: sem presença na sessão; Senado: `NCom`), `nao_votou` (estava na sessão e não votou; Senado: `P-NRV`) e `ausencia_justificada` (Senado: `MIS`, `AP`, `LS`, `LP`…, código em `voto_oficial`). A API da Câmara não informa ausência justificada.
 - `db/schema.sql` — esquema Supabase com RLS; guarda o mínimo; apagar o usuário apaga tudo.
 - `docs/decisoes.md` — resumo das decisões.
 

@@ -62,7 +62,10 @@ create table if not exists votacoes (
 create table if not exists votos (
   votacao_id text references votacoes(id) on delete cascade,
   politico_id text references politicos(id),
-  voto text not null check (voto in ('sim', 'nao', 'abst', 'falta', 'obstrucao', 'art17')),
+  voto text not null check (voto in ('sim', 'nao', 'abst', 'falta', 'obstrucao', 'art17', 'presidente')),
+  -- O app mostra tudo como "faltou"; o detalhe fica guardado para transparência.
+  falta_detalhe text check (falta_detalhe in ('nao_compareceu', 'nao_votou', 'ausencia_justificada')),
+  voto_oficial text,              -- texto original da Casa (ex.: "MIS", "P-NRV")
   primary key (votacao_id, politico_id)
 );
 

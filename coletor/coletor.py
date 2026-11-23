@@ -10,9 +10,14 @@ Validado contra as APIs reais em 23/11/2026. Votações simbólicas e secretas
 não têm voto individual (saem com "nominal": false).
 
 Valores de "voto": sim, nao, abst, obstrucao, art17 (presidente da Câmara),
-presidente (presidente da sessão no Senado), nao_votou (estava na sessão e não
-votou), falta (não compareceu / não registrou presença) e ausencia_justificada
-(Senado: missão, atividade parlamentar ou licença; motivo em "voto_oficial").
+presidente (presidente da sessão no Senado) e falta.
+
+Decisão de produto (Kathleen, 23/11/2026): tudo que não é voto aparece como
+"faltou". O detalhe fica em "falta_detalhe", para transparência:
+  - nao_compareceu: não compareceu / não registrou presença na sessão;
+  - nao_votou: estava na sessão, mas não votou nesta votação;
+  - ausencia_justificada: Senado, missão, atividade parlamentar ou licença
+    (o código original fica em "voto_oficial").
 A Câmara só lista quem votou; os ausentes são completados cruzando com os
 deputados em exercício na data e com a presença registrada na sessão.
 """
@@ -44,7 +49,7 @@ VOTO_NORMALIZADO = {
     # Senado: quem preside a sessão não vota (art. 51 do Regimento).
     "presidente (art. 51 risf)": "presidente",
     # Senado: não compareceu, sem justificativa registrada.
-    "ncom": "falta",
+    "ncom": "nao_compareceu",
     # Senado: ausências justificadas (missão, atividade parlamentar, licenças).
     # O código original fica em "voto_oficial" para o app explicar o motivo.
     "mis": "ausencia_justificada",
@@ -69,10 +74,20 @@ def get_json(url, params=None, tentativas=3):
     resp.raise_for_status()
 
 
+TIPOS_DE_FALTA = {"nao_compareceu", "nao_votou", "ausencia_justificada"}
+
+
 def normaliza_voto(texto):
     if not texto:
-        return "falta"
+        return "nao_compareceu"
     return VOTO_NORMALIZADO.get(texto.strip().lower(), texto.strip().lower())
+
+
+def registro_de_voto(categoria):
+    """Campos "voto" e "falta_detalhe" a partir da categoria interna."""
+    if categoria in TIPOS_DE_FALTA:
+        return {"voto": "falta", "falta_detalhe": categoria}
+    return {"voto": categoria, "falta_detalhe": None}
 
 
 # ---------- Câmara ----------
@@ -115,10 +130,10 @@ def presentes_na_sessao(id_evento):
 def completa_ausentes_camara(votos, dia, id_evento):
     """A Câmara só lista quem votou. Acrescenta quem estava em exercício e não votou.
 
+    Todos saem com voto "falta". Em "falta_detalhe":
     - "nao_votou": registrou presença na sessão, mas não votou nesta votação.
-    - "falta": não registrou presença na sessão.
-    A API não informa ausências justificadas (missão, licença) da Câmara, então
-    "falta" aqui quer dizer só "não registrou presença", sem julgar o motivo.
+    - "nao_compareceu": não registrou presença na sessão.
+    A API não informa ausências justificadas (missão, licença) da Câmara.
     """
     votaram = {v["politico_id"] for v in votos}
     presentes = presentes_na_sessao(id_evento)
@@ -132,7 +147,7 @@ def completa_ausentes_camara(votos, dia, id_evento):
             "nome": d.get("nome"),
             "partido": d.get("siglaPartido"),
             "uf": d.get("siglaUf"),
-            "voto": "nao_votou" if estava else "falta",
+            **registro_de_voto("nao_votou" if estava else "nao_compareceu"),
             "voto_oficial": None,
             "presenca_sessao": estava if presentes is not None else None,
         })
@@ -163,7 +178,7 @@ def votos_camara(id_votacao):
         "nome": v["deputado_"]["nome"],
         "partido": v["deputado_"].get("siglaPartido"),
         "uf": v["deputado_"].get("siglaUf"),
-        "voto": normaliza_voto(v.get("tipoVoto")),
+        **registro_de_voto(normaliza_voto(v.get("tipoVoto"))),
         "voto_oficial": v.get("tipoVoto"),
     } for v in dados]
 
@@ -236,7 +251,7 @@ def coleta_senado(inicio, fim):
                 "nome": p.get("NomeParlamentar"),
                 "partido": p.get("SiglaPartido"),
                 "uf": p.get("SiglaUF"),
-                "voto": normaliza_voto(p.get("SiglaVoto") or p.get("Voto")),
+                **registro_de_voto(normaliza_voto(p.get("SiglaVoto") or p.get("Voto"))),
                 "voto_oficial": p.get("SiglaVoto") or p.get("Voto"),
             } for p in votos_raw],
             "fonte": f"{SENADO}/plenario/lista/votacao/{i}/{f}",

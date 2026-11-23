@@ -11,6 +11,9 @@ Identidade visual (canvas): https://claude.ai/artifact/Bn3hd8Rknhce1jXnygiqnp
 - Tipografia: Space Grotesk (títulos) e Inter (texto).
 - Sem verde/vermelho para votos: mesma cor, formas diferentes.
 
+## Votos
+- Tudo que não é voto aparece como **"faltou"**: não compareceu, estava na sessão e não votou, ou ausência justificada (missão, licença). O motivo fica guardado nos dados (`falta_detalhe`), mas o app mostra "faltou" (decisão de 23/11/2026).
+
 ## Canais
 - Site + e-mail semanal (Brevo). WhatsApp e SMS avaliados e descartados nesta fase.
 - Acesso sem senha por link mágico; sessão longa; dados no servidor.
