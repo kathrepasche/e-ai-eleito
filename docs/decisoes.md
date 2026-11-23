@@ -26,6 +26,6 @@ Identidade visual (canvas): https://claude.ai/artifact/Bn3hd8Rknhce1jXnygiqnp
 
 ## Pendências
 - [ ] Busca de marca no INPI (classes 9, 38, 41, 42), domínio eaieleito.com.br e @eaieleito
-- [ ] Validar o coletor com uma semana real
+- [x] Validar o coletor com uma semana real (23/11/2026)
 - [ ] Teste de compreensão com 5 pessoas leigas
 - [ ] Consulta jurídica (LGPD e direito eleitoral)

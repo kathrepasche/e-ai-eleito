@@ -40,7 +40,11 @@ Público: qualquer eleitor, inclusive leigos em política (teste de clareza: alg
 ## O que existe no repositório
 - `site/index.html` — protótipo completo, HTML único, dados fictícios (Partido A–G, nomes inventados). Rotas por hash: #inicio, #cadastro, #semana (Tô de olho), #perfil-<id>, #cargos, #eleicao, #preferencias, #entrar.
 - `email/email-sua-semana.html` — modelo do e-mail (sintaxe de variáveis do Brevo).
-- `coletor/coletor.py` — busca votações da Câmara (API v2) e do Senado (API legada) e salva JSON. **Nunca foi executado contra as APIs reais**: validar primeiro, principalmente os caminhos do Senado.
+- `coletor/coletor.py` — busca votações da Câmara (API v2) e do Senado (API legada) e salva JSON. Validado contra as APIs reais em 23/11/2026 (semana 16–22/11 e outubro/2026). O que aprendemos:
+  - A Câmara devolve no máximo 100 itens por página; o coletor segue o link `next`.
+  - Muitas votações da Câmara são simbólicas (sem voto individual) e alguns registros ("Alteração do Regime de Tramitação") dão 404 no detalhe; ambos saem com `nominal: false`.
+  - O Senado usa votos como `P-NRV` (presente, não votou) e `Presidente (art. 51 RISF)`; votações secretas não têm voto individual.
+  - **Lacuna:** a lista de votos da Câmara só traz quem votou. Para mostrar "faltou" é preciso cruzar com a lista de deputados em exercício na data.
 - `db/schema.sql` — esquema Supabase com RLS; guarda o mínimo; apagar o usuário apaga tudo.
 - `docs/decisoes.md` — resumo das decisões.
 
