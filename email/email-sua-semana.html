@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>E aí, eleito? Sua semana</title>
+<!--
+  Modelo do resumo semanal "E aí, eleito? Sua semana".
+  Feito para envio transacional pelo Brevo (sintaxe de variáveis do Brevo: {{ params.X }} e {% for %}).
+  Variáveis esperadas em params:
+    nome            texto, pode vir vazio
+    periodo         ex.: "16 a 22 de novembro"
+    link_semana     link pessoal, sem senha, para a página "Minha semana"
+    politicos       lista; cada item tem:
+      nome, cargo, partido, uf, resumo (ex.: "Votou em 3 de 4 votações das suas pautas"),
+      link_perfil, silencio (texto ou vazio), itens (lista de {data, pauta, marca, texto})
+      marca é um destes símbolos de texto: "✔" sim, "✖" não, "–" abstenção, "○" faltou, "❝" discurso
+  Estilos inline e tabelas para funcionar no Gmail, Outlook e apps de celular.
+  Sem verde e vermelho para votos: o voto é informado, não julgado.
+-->
+</head>
+<body style="margin:0;padding:0;background:#F7F5F0;">
+<div style="display:none;max-height:0;overflow:hidden;">O que seus políticos fizeram, e o que não fizeram, de {{ params.periodo }}.</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#F7F5F0;">
+<tr><td align="center" style="padding:24px 12px;">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;">
+
+<tr><td style="background:#1B1B1F;border-radius:16px 16px 0 0;padding:28px 28px 24px;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+<td style="background:#3B3486;border-radius:10px;width:44px;height:44px;text-align:center;vertical-align:middle;font-family:Arial,Helvetica,sans-serif;font-size:22px;font-weight:bold;color:#F5C544;">?</td>
+<td style="padding-left:12px;font-family:Arial,Helvetica,sans-serif;font-size:20px;font-weight:bold;color:#F7F5F0;">E aí, Eleito?</td>
+</tr></table>
+<p style="margin:22px 0 4px;font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#C9C9D1;">Fique de olho nessa semana · {{ params.periodo }}</p>
+<h1 style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:28px;line-height:1.2;color:#F7F5F0;">{% if params.nome %}{{ params.nome }}, olha{% else %}Olha{% endif %} o que seus políticos fizeram</h1>
+</td></tr>
+
+<tr><td style="background:#FFFFFF;padding:8px 28px 8px;border-left:1px solid #E4E1D8;border-right:1px solid #E4E1D8;">
+{% for p in params.politicos %}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-bottom:1px solid #E4E1D8;">
+<tr><td style="padding:22px 0 6px;font-family:Arial,Helvetica,sans-serif;">
+<p style="margin:0;font-size:19px;font-weight:bold;color:#1B1B1F;">{{ p.nome }}</p>
+<p style="margin:2px 0 0;font-size:14px;color:#5A5A66;">{{ p.cargo }} · {{ p.partido }} · {{ p.uf }}</p>
+<p style="margin:12px 0 4px;font-size:16px;color:#1B1B1F;"><b>{{ p.resumo }}</b></p>
+</td></tr>
+{% for i in p.itens %}
+<tr><td style="padding:6px 0;font-family:Arial,Helvetica,sans-serif;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr>
+<td width="28" valign="top" style="font-size:16px;color:#1B1B1F;padding-top:1px;">{{ i.marca }}</td>
+<td style="font-size:16px;line-height:1.45;color:#1B1B1F;">{{ i.texto }}<br><span style="font-size:13px;color:#5A5A66;">{{ i.data }} · {{ i.pauta }}</span></td>
+</tr></table>
+</td></tr>
+{% endfor %}
+{% if p.silencio %}
+<tr><td style="padding:10px 0 4px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+<td style="background:#FFF6D6;border:1px solid #F0DE9A;border-radius:12px;padding:12px 14px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.45;color:#1B1B1F;">{{ p.silencio }} E aí, eleito?</td>
+</tr></table>
+</td></tr>
+{% endif %}
+<tr><td style="padding:10px 0 22px;font-family:Arial,Helvetica,sans-serif;font-size:15px;">
+<a href="{{ p.link_perfil }}" style="color:#3B3486;font-weight:bold;">Ver o histórico completo de {{ p.nome }}</a>
+</td></tr>
+</table>
+{% endfor %}
+</td></tr>
+
+<tr><td style="background:#FFFFFF;padding:24px 28px 28px;border:1px solid #E4E1D8;border-top:0;border-radius:0 0 16px 16px;" align="center">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+<td style="background:#3B3486;border-radius:12px;">
+<a href="{{ params.link_semana }}" style="display:inline-block;padding:14px 26px;font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:bold;color:#FFFFFF;text-decoration:none;">Abrir o Tô de olho no site</a>
+</td></tr></table>
+<p style="margin:14px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#5A5A66;">Cada votação tem link para a fonte oficial da Câmara ou do Senado.</p>
+</td></tr>
+
+<tr><td style="padding:22px 12px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.5;color:#5A5A66;" align="center">
+<p style="margin:0 0 6px;">E aí, Eleito? é apartidário. Não pedimos seu voto e não vendemos seus dados.</p>
+<p style="margin:0 0 6px;">Você recebe este e-mail porque se cadastrou em eaieleito.com.br.</p>
+<p style="margin:0;"><a href="{{ params.link_semana }}" style="color:#5A5A66;">Mudar políticos ou pautas</a> · <a href="{{ unsubscribe }}" style="color:#5A5A66;">Parar de receber</a></p>
+</td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>E aí, Eleito?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: conversa direta, bem-humorada e neutra; fatos, nunca adjetivos.
+   IDEA: a tela da urna depois do FIM, que vira balão de conversa.
+   PICTURE: o ícone Depois do FIM grande, com o e-mail semanal saindo dele.
+   COLOUR and TYPE: papel, grafite, azul-tinta e grifo marca-texto; Space Grotesk + Inter.
+   LAYOUT: faixa escura de abertura, depois faixas claras; formulários em uma coluna calma. */
+:root{color-scheme:light dark;
+--bg:light-dark(#F7F5F0,#141418);--card:light-dark(#FFFFFF,#1F1F26);--ink:light-dark(#1B1B1F,#F2F0EA);
+--mute:light-dark(#5A5A66,#B4B4C0);--line:light-dark(#E4E1D8,#33333D);--tinta:light-dark(#3B3486,#A9A4F0);
+--tintabg:#3B3486;--grifo:#F5C544;--chip:light-dark(#E6E3F3,#2C2A45);--contorno:none;--aviso:light-dark(#FFF6D6,#2E2A1A);--avisol:light-dark(#F0DE9A,#5A4E22)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--contorno:-1.5px -1.5px 0 #1B1B1F,1.5px -1.5px 0 #1B1B1F,-1.5px 1.5px 0 #1B1B1F,1.5px 1.5px 0 #1B1B1F,0 -1.5px 0 #1B1B1F,0 1.5px 0 #1B1B1F,-1.5px 0 0 #1B1B1F,1.5px 0 0 #1B1B1F}}
+:root[data-theme=dark]{--contorno:-1.5px -1.5px 0 #1B1B1F,1.5px -1.5px 0 #1B1B1F,-1.5px 1.5px 0 #1B1B1F,1.5px 1.5px 0 #1B1B1F,0 -1.5px 0 #1B1B1F,0 1.5px 0 #1B1B1F,-1.5px 0 0 #1B1B1F,1.5px 0 0 #1B1B1F}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;line-height:1.08;text-wrap:balance;margin:0}
+h1{font-size:clamp(34px,5vw,52px)}h2{font-size:clamp(26px,3.4vw,36px)}h3{font-size:19px}
+p{margin:0}a{color:var(--tinta)}
+.band{padding:clamp(28px,4vw,64px) max(5vw,16px)}.wrap{max-width:1240px;margin:0 auto}
+.col{max-width:620px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:16px;padding:10px max(5vw,16px);flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font:700 19px 'Space Grotesk',sans-serif;margin-right:auto}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{min-height:44px;display:flex;align-items:center;padding:0 12px;border-radius:10px;color:var(--ink);text-decoration:none;font-weight:500}
+nav a[aria-current=page]{background:var(--chip);color:var(--tinta)}
+.btn{min-height:48px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0 20px;border-radius:12px;border:2px solid transparent;font:600 16px Inter,sans-serif;text-decoration:none;cursor:pointer}
+.btn.pri{background:var(--tintabg);color:#fff}.btn.gri{background:var(--grifo);color:#1B1B1F}
+.btn.sec{background:var(--card);color:var(--ink);border-color:var(--ink)}.btn.txt{background:none;color:var(--tinta);padding:0 8px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+:focus-visible{outline:3px solid var(--grifo);outline-offset:2px}
+.hero{background:#1B1B1F;color:#F7F5F0}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:center}
+.risca{text-decoration:line-through;text-decoration-thickness:4px;color:#A9A9B4}.amarelo{color:var(--grifo)}
+.hero p.sub{font-size:18px;color:#D6D6DE;max-width:520px;margin:18px 0 26px}
+.pic{position:relative;min-height:360px}
+.pic .ico{position:absolute;left:4%;top:0;width:58%;max-width:300px;filter:drop-shadow(0 18px 30px rgba(0,0,0,.45))}
+.pic .mail{position:absolute;right:0;bottom:0;width:66%;max-width:340px;background:#F7F5F0;color:#1B1B1F;border-radius:18px;padding:18px;box-shadow:0 20px 40px rgba(0,0,0,.4);display:flex;flex-direction:column;gap:10px}
+.pic .mail{--bg:#F7F5F0}.mail small{color:#5A5A66;font-size:13px}.mail b{font-family:'Space Grotesk',sans-serif;font-size:18px}
+.li{display:flex;gap:10px;align-items:flex-start}.li svg{flex:none;margin-top:2px}
+.grifo{background:linear-gradient(transparent 58%,var(--grifo) 58%);padding:0 3px;color:inherit;text-shadow:var(--contorno)}
+.pic .mail .grifo{--contorno:none}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.princ{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:24px}
+details{border-bottom:1px solid var(--line);padding:14px 0}summary{cursor:pointer;font-weight:600;min-height:32px}
+details p{margin-top:8px;color:var(--mute)}
+footer{border-top:1px solid var(--line);color:var(--mute);font-size:14px}
+.nota{font-size:13px;color:var(--mute)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:44px;padding:0 16px;border-radius:22px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:500 15px Inter,sans-serif;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:600}
+label{font-weight:600;font-size:15px}
+input[type=email],input[type=text],input[type=search],select{width:100%;min-height:48px;border-radius:12px;border:1px solid var(--mute);background:var(--card);color:var(--ink);padding:0 12px;font:16px Inter,sans-serif;margin-top:6px}
+.check{display:flex;gap:10px;align-items:flex-start;font-weight:400}.check input{width:22px;height:22px;flex:none;margin-top:2px}
+.pessoa{display:flex;align-items:center;gap:12px}
+.av{width:44px;height:44px;border-radius:22px;background:var(--chip);color:var(--tinta);display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}
+.pessoa .nome{font-weight:600}.pessoa .meta{font-size:13px;color:var(--mute)}
+.passo{font-size:14px;color:var(--mute)}
+.bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;background:var(--tintabg)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.silencio{background:var(--aviso);border:1px solid var(--avisol);border-radius:14px;padding:12px 14px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stats .card{padding:14px;gap:2px}.stats b{font:700 26px 'Space Grotesk',sans-serif}
+.item{display:flex;gap:12px}.item .dt{font-size:13px;color:var(--mute)}
+.vazio{color:var(--mute)}
+.placar{display:flex;height:14px;border-radius:7px;overflow:hidden;background:var(--line)}.placar i{display:block;height:100%}
+.voto-det{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:0 14px}
+.voto-det summary{display:flex;align-items:center;gap:10px;min-height:52px;list-style:none}.voto-det summary::-webkit-details-marker{display:none}
+.voto-det summary b{margin-left:auto;font:700 20px 'Space Grotesk',sans-serif}.voto-det ul{margin:0 0 12px;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.tabela{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.tabela table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
+.tabela th,.tabela td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.tabela th{font-weight:600;font-size:14px}.tabela td.q{min-width:220px}.tabela tr:last-child td{border-bottom:0}
+.ok{font-weight:600}.ok::before{content:'✓ ';color:var(--tinta)}
+.perg{display:flex;flex-direction:column;gap:10px;padding:16px 0;border-bottom:1px solid var(--line)}
+.cargobar{position:sticky;top:var(--hh,64px);z-index:4;background:var(--bg);border-bottom:1px solid var(--line)}.cargobar .chips{flex-wrap:nowrap;overflow-x:auto}.cargobar .chip{flex:none}
+textarea{width:100%;min-height:120px;border-radius:12px;border:1px solid var(--mute);background:var(--card);color:var(--ink);padding:12px;font:16px/1.5 Inter,sans-serif;margin-top:6px;resize:vertical}
+.contato{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.contato .card{padding:12px;gap:2px}.contato b{overflow-wrap:anywhere}
+@media(max-width:600px){.contato{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:900px){.princ{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.hero .wrap{grid-template-columns:minmax(0,1fr)}.pic{min-height:320px}.steps,.grid2{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.princ{grid-template-columns:minmax(0,1fr)}.stats b{font-size:22px}nav a{padding:0 8px}}
+@media(prefers-reduced-motion:no-preference){.pic .mail{animation:sobe .7s ease-out both .2s}@keyframes sobe{from{transform:translateY(24px);opacity:0}}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<a class="brand" href="#inicio"><span id="logoP"></span>E aí, Eleito?</a>
+<nav aria-label="Principal"><a href="#inicio" data-v="inicio">Início</a><a href="#cargos" data-v="cargos">Cargos</a><a href="#semana" data-v="semana">Tô de olho</a><a href="#eleicao" data-v="eleicao">Eleição</a><a href="#preferencias" data-v="preferencias" id="navConta">Preferências</a></nav>
+</div></header>
+<main id="app"></main>
+<footer class="band"><div class="wrap" style="display:flex;flex-direction:column;gap:6px">
+<p><b style="color:var(--ink)">E aí, Eleito?</b> · Apartidário. Não pedimos seu voto e não vendemos seus dados.</p>
+<p>Fontes: Dados Abertos da Câmara dos Deputados e do Senado Federal.</p>
+<p class="nota">Protótipo: nomes, partidos e votações são fictícios. Nenhum e-mail é enviado.</p>
+</div></footer>
+<script>
+{
+const ICON=(s,small)=>small?`<svg width="${s}" height="${s}" viewBox="0 0 120 120" aria-hidden="true"><rect width="120" height="120" rx="28" fill="#3B3486"/><rect x="12" y="14" width="80" height="56" rx="8" fill="#F7F5F0"/><text x="22" y="46" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="24" fill="#5A5A66">FIM</text><path d="M18 38H72" stroke="#1B1B1F" stroke-width="5" stroke-linecap="round"/><path d="M46 50H104A8 8 0 0 1 112 58V90A8 8 0 0 1 104 98H70L56 110V98H46A8 8 0 0 1 38 90V58A8 8 0 0 1 46 50Z" fill="#F5C544"/><text x="75" y="88" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="32" fill="#1B1B1F">?</text></svg>`
+:`<svg viewBox="0 0 120 120" role="img" aria-label="Tela da urna com FIM riscado e um balão E aí?"><rect width="120" height="120" rx="28" fill="#3B3486"/><rect x="14" y="16" width="80" height="54" rx="7" fill="#F7F5F0"/><text x="26" y="42" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="17" fill="#5A5A66">FIM</text><path d="M22 36H64" stroke="#1B1B1F" stroke-width="3" stroke-linecap="round"/><rect x="14" y="78" width="14" height="10" rx="3" fill="#F7F5F0"/><rect x="32" y="78" width="14" height="10" rx="3" fill="#F7F5F0" fill-opacity=".6"/><path d="M50 54H102A6 6 0 0 1 108 60V88A6 6 0 0 1 102 94H68L56 106V94H50A6 6 0 0 1 44 88V60A6 6 0 0 1 50 54Z" fill="#F5C544"/><text x="76" y="80" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="16" fill="#1B1B1F">E aí?</text></svg>`;
+const V={sim:{t:'Votou sim',s:'<svg width="22" height="22" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="currentColor"/><path d="M14 24L21 31L34 17" stroke="var(--bg)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'},
+nao:{t:'Votou não',s:'<svg width="22" height="22" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="4"/><path d="M16 16L32 32M32 16L16 32" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg>'},
+abst:{t:'Absteve-se',s:'<svg width="22" height="22" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="4"/><path d="M15 24H33" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg>'},
+falta:{t:'Faltou',s:'<svg width="22" height="22" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="6 6"/></svg>'},
+fala:{t:'Discursou',s:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'}};
+const UFS=['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO'];
+const PAUTAS=['Saúde','Educação','Segurança','Economia e emprego','Aposentadoria','Impostos','Meio ambiente','Moradia','Transporte','Direitos e cidadania','Agricultura','Tecnologia'];
+const POL=[
+{id:'pr',n:'Renata Albuquerque',c:'pres',p:'Partido E'},
+{id:'s1',n:'Helena Prado',c:'sen',p:'Partido A',m:'mandato até 2031'},{id:'s2',n:'Otávio Lins',c:'sen',p:'Partido B',m:'mandato até 2031'},{id:'s3',n:'Celso Amaral',c:'sen',p:'Partido C',m:'mandato até 2027'},
+{id:'d1',n:'Marina Duarte',c:'dep',p:'Partido A'},{id:'d2',n:'Rafael Souto',c:'dep',p:'Partido B'},{id:'d3',n:'Joana Ribeiro',c:'dep',p:'Partido C'},
+{id:'d4',n:'Luís Fontana',c:'dep',p:'Partido D'},{id:'d5',n:'Beatriz Nogueira',c:'dep',p:'Partido A'},{id:'d6',n:'Caio Mendes',c:'dep',p:'Partido B'}];
+const CARGO={dep:'Deputado federal',sen:'Senador',pres:'Presidente da República'};
+const onde=p=>p.c==='pres'?'Brasil':(S.uf||'UF');
+const VOT=[
+{id:'c1',casa:'dep',d:'2026-11-18',pa:'Saúde',f:'Amplia o horário dos postos de saúde até as 22h em cidades grandes',r:'Aprovado'},
+{id:'c2',casa:'dep',d:'2026-11-18',pa:'Educação',f:'Cria bolsa para alunos do ensino médio que fizerem estágio',r:'Aprovado'},
+{id:'c3',casa:'dep',d:'2026-11-19',pa:'Segurança',f:'Aumenta a pena para golpes aplicados pelo celular',r:'Aprovado'},
+{id:'c4',casa:'dep',d:'2026-11-20',pa:'Impostos',f:'Aumenta o limite de faturamento do MEI',r:'Rejeitado'},
+{id:'c5',casa:'dep',d:'2026-11-12',pa:'Aposentadoria',f:'Muda a regra de transição da aposentadoria de professores',r:'Aprovado'},
+{id:'c6',casa:'dep',d:'2026-11-11',pa:'Meio ambiente',f:'Exige plano de prevenção de enchentes em cidades com mais de 100 mil habitantes',r:'Aprovado'},
+{id:'c7',casa:'dep',d:'2026-11-05',pa:'Economia e emprego',f:'Permite usar parte do FGTS para quitar dívidas no cartão',r:'Aprovado'},
+{id:'c8',casa:'dep',d:'2026-11-04',pa:'Transporte',f:'Dá desconto a estudantes no ônibus intermunicipal',r:'Rejeitado'},
+{id:'e1',casa:'sen',d:'2026-11-19',pa:'Saúde',f:'Obriga planos de saúde a informar o prazo para autorizar exames',r:'Aprovado'},
+{id:'e2',casa:'sen',d:'2026-11-18',pa:'Educação',f:'Garante internet nas escolas públicas rurais até 2028',r:'Aprovado'},
+{id:'e3',casa:'sen',d:'2026-11-12',pa:'Moradia',f:'Permite usar o FGTS para reformar a casa própria',r:'Aprovado'},
+{id:'e4',casa:'sen',d:'2026-11-06',pa:'Segurança',f:'Cria um cadastro nacional de pessoas desaparecidas',r:'Aprovado'}];
+const FALAS={d1:[['2026-11-19','Saúde'],['2026-11-06','Educação']],d2:[['2026-11-18','Impostos']],d3:[['2026-11-13','Meio ambiente']],d4:[],d5:[['2026-11-20','Segurança'],['2026-11-04','Transporte']],d6:[['2026-11-12','Aposentadoria']],s1:[['2026-11-19','Saúde']],s2:[],s3:[['2026-11-07','Moradia']]};
+const PRES=[
+{d:'2026-11-20',t:'san',pa:'Educação',f:'a lei que garante internet nas escolas públicas rurais até 2028',ref:'e2',x:'Agora é lei.'},
+{d:'2026-11-21',t:'san',pa:'Moradia',f:'a lei que permite usar o FGTS para reformar a casa própria',ref:'e3',x:'Agora é lei e passa a valer em 90 dias.'},
+{d:'2026-11-19',t:'vet',pa:'Economia e emprego',f:'a lei que permite usar parte do FGTS para quitar dívidas no cartão',ref:'c7',x:'O Congresso ainda pode derrubar o veto.'},
+{d:'2026-11-17',t:'mp',pa:'Aposentadoria',f:'uma medida provisória que antecipa o 13º de aposentados do INSS para fevereiro',x:'Vale na hora, mas o Congresso tem até 120 dias para aprová-la, ou ela perde a validade.'},
+{d:'2026-11-10',t:'san',pa:'Meio ambiente',f:'a lei que exige plano de prevenção de enchentes em cidades com mais de 100 mil habitantes',ref:'c6',x:'Agora é lei.'}];
+const PT={san:['Sancionou','<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15l2 2 4-4"/></svg>'],
+vet:['Vetou','<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M10 13l4 4M14 13l-4 4"/></svg>'],
+mp:['Editou','<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg>']};
+const linhaPres=d=>{const v=d.ref&&VOT.find(x=>x.id===d.ref);const seus=v?S.seg.map(pol).filter(q=>q&&q.c===v.casa):[];
+return `<div class="item">${PT[d.t][1]}<div><p class="dt">${dt(d.d)} · ${d.pa}</p><p><b>${PT[d.t][0]}</b> ${d.f}.</p><p class="dt">${d.x}</p>${seus.length?`<p class="dt">Quem você está de olho: ${seus.map(q=>`${q.n} ${V[voto(q.id,v.id)].t.toLowerCase()}`).join(' · ')}</p>`:''}</div></div>`};
+const EXP={
+c1:['Postos de saúde de cidades com mais de 500 mil habitantes passariam a atender até as 22h.','Quem trabalha de dia conseguiria ser atendido sem faltar ao serviço.','O custo extra com equipes à noite ficaria com as prefeituras.'],
+c2:['Alunos do ensino médio que fizerem estágio receberiam uma bolsa mensal paga pelo governo federal.','Ajuda o jovem a ganhar experiência e diminui a evasão escolar.','O dinheiro sairia de outras áreas da educação.'],
+c3:['A pena para golpes aplicados por celular, como o falso parente no WhatsApp, ficaria maior.','Golpes digitais cresceram e a pena atual não desestimula.','Aumentar pena sozinho não resolve: falta investigar e prender.'],
+c4:['O limite que o MEI pode faturar por ano subiria, e mais pessoas caberiam nesse regime de imposto menor.','Ajuda quem cresceu a continuar formalizado.','O governo arrecadaria menos impostos.'],
+c5:['Professores perto de se aposentar teriam uma regra de transição diferente da atual.','Reconhece o desgaste da profissão.','Aumenta o gasto da Previdência.'],
+c6:['Cidades com mais de 100 mil habitantes teriam que ter um plano de prevenção de enchentes.','Pode evitar mortes e prejuízos com chuvas fortes.','Cidades pequenas e médias podem não ter dinheiro nem equipe para isso.'],
+c7:['Trabalhadores poderiam usar parte do FGTS para quitar dívidas do cartão de crédito.','Ajuda famílias endividadas a sair dos juros altos.','O FGTS serve de reserva para demissão e casa própria, e ficaria menor.'],
+c8:['Estudantes teriam desconto nas passagens de ônibus entre cidades.','Facilita o acesso à escola e à faculdade em outra cidade.','O desconto pode encarecer a passagem dos outros passageiros.'],
+e1:['Planos de saúde teriam que informar ao cliente o prazo para autorizar cada exame.','Dá mais transparência e evita espera sem resposta.','As operadoras dizem que já existem regras e que o custo seria repassado.'],
+e2:['Todas as escolas públicas rurais teriam internet até 2028.','Diminui a diferença entre escolas do campo e da cidade.','O prazo e o custo podem ser difíceis de cumprir.'],
+e3:['O FGTS poderia ser usado para reformar a casa própria.','Ajuda a melhorar moradias sem precisar de empréstimo.','Diminui a reserva do trabalhador para emergências.'],
+e4:['Seria criado um cadastro nacional de pessoas desaparecidas, ligando dados de todos os estados.','Ajuda a encontrar pessoas mais rápido.','Exige cuidado com a privacidade dos dados das famílias.']};
+const CAND=[{id:'k1',n:'Augusto Pires',c:'dep',p:'Partido F'},{id:'k2',n:'Lívia Torres',c:'dep',p:'Partido G'},{id:'k3',n:'Sérgio Lemos',c:'sen',p:'Partido F'},{id:'k4',n:'Tânia Ramos',c:'sen',p:'Partido G'}];
+const RESP=['sim','nao','sim','nr','sim','nao','sim'];
+const respCand=(cid,qid)=>{let h=7;for(const ch of cid+qid)h=(h*17+ch.charCodeAt(0))%991;return RESP[h%RESP.length]};
+const RT={sim:'Sim',nao:'Não',abst:'Absteve-se',falta:'Faltou',nr:'Não respondeu',tf:'Tanto faz'};
+const SEM_INI='2026-11-16',SEM_FIM='2026-11-22';
+const OPC=['sim','sim','nao','sim','falta','abst','nao','sim','falta'];
+const voto=(pid,vid)=>{let h=0;for(const ch of pid+vid)h=(h*31+ch.charCodeAt(0))%997;return OPC[h%OPC.length]};
+const dt=s=>{const[a,m,d]=s.split('-');return `${+d}/${+m}`};
+let S={abertos:{},resp:{},imp:{},cargoE:'dep',abaE:'balanco',cmp:null,uf:'',seg:[],ocultos:[],pautas:['Saúde','Educação','Segurança'],todas:false,email:'',nome:'',ok:false,passo:1,busca:'',filtroC:'todos',filtroP:'todas'};
+try{const g=JSON.parse(localStorage.getItem('eaieleito')||'null');if(g)S={...S,...g,passo:1,busca:''}}catch(e){}
+const salva=()=>{try{localStorage.setItem('eaieleito',JSON.stringify({uf:S.uf,seg:S.seg,pautas:S.pautas,todas:S.todas,ocultos:S.ocultos,email:S.email,nome:S.nome,ok:S.ok}))}catch(e){}};
+const minhas=()=>S.todas?PAUTAS:S.pautas;
+const ini=n=>n.split(' ').map(x=>x[0]).slice(0,2).join('');
+const pol=id=>POL.find(p=>p.id===id);
+const slug=n=>n.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,'');
+const contato=p=>({email:(p.c==='dep'?'dep.':'sen.')+slug(p.n)+'@'+(p.c==='dep'?'camara.leg.br':'senado.leg.br'),fone:p.c==='dep'?'(61) 3215-5'+(100+POL.indexOf(p)*37):'(61) 3303-'+(4100+POL.indexOf(p)*21),rede:'@'+slug(p.n),geral:p.c==='dep'?'Disque-Câmara: 0800 619 619':'Alô Senado: 0800 061 2211'});
+const msgPadrao=p=>{const f=VOT.filter(v=>v.casa===p.c&&voto(p.id,v.id)==='falta').sort((a,b)=>b.d.localeCompare(a.d))[0];const sil=silencios(p,'2026-08-24',SEM_FIM)[0];
+const pn=p.n.split(' ')[0];
+if(f)return `Olá, ${pn}. Sou eleitor(a) de ${S.uf||'seu estado'} e acompanho seu mandato. Vi que você não votou no projeto que ${f.f.charAt(0).toLowerCase()+f.f.slice(1)} (${dt(f.d)}). Pode explicar sua ausência e qual é sua posição sobre o tema?`;
+if(sil)return `Olá, ${pn}. Sou eleitor(a) de ${S.uf||'seu estado'} e acompanho seu mandato. Nos últimos meses não vi você falar sobre ${sil.toLowerCase()}. Qual é sua posição e o que pretende fazer sobre o tema?`;
+return `Olá, ${pn}. Sou eleitor(a) de ${S.uf||'seu estado'} e acompanho seu mandato. Gostaria de saber sua posição sobre ${minhas()[0].toLowerCase()}.`};
+const app=document.getElementById('app');
+document.getElementById('logoP').innerHTML=ICON(34,true);
+const linhaVoto=(p,v)=>{const o=voto(p.id,v.id);return `<div class="item">${V[o].s}<div><p class="dt">${dt(v.d)} · ${v.pa}</p><p><b>${V[o].t}</b> ${o==='falta'?'à votação que':'no projeto que'} ${v.f.charAt(0).toLowerCase()+v.f.slice(1)}.</p><p class="dt">Resultado: ${v.r.toLowerCase()} · <a href="${v.casa==='dep'?'https://dadosabertos.camara.leg.br/':'https://www12.senado.leg.br/dados-abertos'}">Fonte oficial</a></p></div></div>`};
+const silencios=(p,ini,fim)=>{const f=(FALAS[p.id]||[]).filter(x=>x[0]>=ini&&x[0]<=fim).map(x=>x[1]);return minhas().filter(x=>!f.includes(x))};
+
+const views={
+inicio(){return `<section class="band hero"><div class="wrap">
+<div><h1>Na urna aparece <span class="risca">FIM</span>.<br><span class="amarelo">Pra gente, é só o começo.</span></h1>
+<p class="sub">Escolha os políticos que você quer acompanhar e as pautas que importam pra você. Toda segunda, um e-mail conta o que eles fizeram, e o que deixaram de fazer, em linguagem simples.</p>
+<div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn gri" href="#cadastro">Quero ficar de olho</a><a class="btn txt" style="color:#F7F5F0" href="#como">Como funciona</a></div></div>
+<div class="pic"><div class="ico">${ICON(0)}</div>
+<div class="mail"><small>Segunda, 8h · para você</small><b>E aí, eleito? Sua semana</b>
+<div class="li">${V.sim.s}<p>Marina Duarte votou sim no horário estendido dos postos de saúde</p></div>
+<div class="li">${V.falta.s}<p>Faltou à votação sobre golpes pelo celular</p></div>
+<div class="li" style="color:#1B1B1F">${V.fala.s}<p>Nenhuma palavra sobre <span class="grifo">segurança</span></p></div></div></div>
+</div></section>
+<section class="band" id="como"><div class="wrap"><h2>Como funciona</h2>
+<div class="steps">
+<div class="card"><h3>Fique de olho</h3><p>Escolha seu estado e os políticos que você quer acompanhar. Pode ser quem você elegeu ou não. Ninguém fica sabendo em quem você votou.</p></div>
+<div class="card"><h3>Escolha suas pautas</h3><p>Saúde, educação, segurança ou todas. O resumo mostra o que eles fizeram sobre cada uma, e também quando ficaram em silêncio.</p></div>
+<div class="card"><h3>Leia em 2 minutos</h3><p>Toda segunda chega um e-mail só seu. No site, a página “Tô de olho” guarda o histórico completo de cada político.</p></div>
+</div></div></section>
+<section class="band" style="background:var(--card);border-block:1px solid var(--line)"><div class="wrap"><h2>Nossas regras</h2>
+<div class="princ">
+<div><h3>Apartidário</h3><p class="vazio" style="margin-top:6px">O mesmo critério para todos os políticos, de qualquer partido.</p></div>
+<div><h3>Fato, não opinião</h3><p class="vazio" style="margin-top:6px">Mostramos como votaram e quando faltaram. Quem julga é você.</p></div>
+<div><h3>Fonte oficial</h3><p class="vazio" style="margin-top:6px">Toda informação tem link para a Câmara ou o Senado.</p></div>
+<div><h3>Seus dados são seus</h3><p class="vazio" style="margin-top:6px">Não vendemos nem compartilhamos. Saia quando quiser.</p></div>
+</div></div></section>
+<section class="band"><div class="col"><h2>Perguntas frequentes</h2><div>
+<details><summary>Quanto custa?</summary><p>Nada. O resumo semanal é gratuito.</p></details>
+<details><summary>Quais cargos vocês acompanham?</summary><p>No começo, deputados federais e senadores, que têm dados abertos completos. Os outros cargos têm explicação na página Cargos e entram aos poucos.</p></details>
+<details><summary>Vocês sabem em quem eu votei?</summary><p>Não. Você escolhe quem quer acompanhar, eleito ou não, e isso não revela seu voto.</p></details>
+<details><summary>O que é “silêncio”?</summary><p>Quando o político não discursou nem apresentou projeto sobre uma pauta sua no período, avisamos. Não falar também é informação.</p></details>
+</div><a class="btn pri" href="#cadastro" style="align-self:flex-start">Começar agora</a></div></section>`},
+
+cadastro(){
+if(S.passo===4)return `<section class="band"><div class="col" style="text-align:center;align-items:center">
+<div style="width:120px">${ICON(0)}</div><h1>Pronto, ${S.nome?S.nome.split(' ')[0]:'tá feito'}!</h1>
+<p>Seu primeiro resumo chega na próxima segunda, às 8h, em <b>${esc(S.email)}</b>.</p>
+<p class="nota">No protótipo, nenhum e-mail é enviado.</p>
+<a class="btn pri" href="#semana">Abrir o Tô de olho</a></div></section>`;
+const pct=S.passo*33.3;
+let corpo='';
+if(S.passo===1){const lista=POL.filter(p=>!S.busca||p.n.toLowerCase().includes(S.busca.toLowerCase()));
+const grupo=c=>lista.filter(p=>p.c===c).map(p=>{const on=S.seg.includes(p.id);return `<div class="card" style="flex-direction:row;align-items:center;padding:12px"><div class="pessoa" style="flex:1"><div class="av">${ini(p.n)}</div><div><p class="nome">${p.n}</p><p class="meta">${p.p}${p.m?' · '+p.m:''}</p></div></div><button class="btn ${on?'pri':'sec'}" style="min-height:44px;padding:0 14px" data-seg="${p.id}" aria-pressed="${on}">${on?'Tô de olho':'Ficar de olho'}</button></div>`}).join('')||'<p class="vazio">Ninguém com esse nome.</p>';
+corpo=`<h1>De quem você quer ficar de olho?</h1><p class="vazio">Siga quem você escolheu, eleito ou não. Ninguém fica sabendo em quem você votou.</p>
+<div><label for="uf">Seu estado</label><select id="uf"><option value="">Escolha</option>${UFS.map(u=>`<option ${S.uf===u?'selected':''}>${u}</option>`).join('')}</select></div>
+${S.uf?`<div><label for="busca">Buscar por nome</label><input id="busca" type="search" value="${esc(S.busca)}" placeholder="Ex.: Marina"></div>
+<h3>Presidente da República <span class="nota" style="font-family:Inter">sugestão</span></h3>${grupo('pres')}<h3>Senadores de ${S.uf}</h3>${grupo('sen')}<h3>Deputados federais de ${S.uf}</h3>${grupo('dep')}`:''}
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span class="nota">${S.seg.length?'De olho em '+S.seg.length:'Ninguém no seu radar ainda'}</span><button class="btn pri" id="prox" ${S.seg.length?'':'disabled'}>Continuar</button></div>`}
+if(S.passo===2){const n=S.pautas.length;
+corpo=`<h1>O que importa pra você?</h1><p class="vazio">Escolha de 3 a 5 pautas, ou acompanhe todas.</p>
+<button class="chip" id="todas" aria-pressed="${S.todas}" style="justify-content:space-between;border-radius:14px;min-height:56px">Todas as pautas</button>
+<p class="nota" style="text-align:center">ou escolha</p>
+<div class="chips">${PAUTAS.map(p=>`<button class="chip" data-pa="${p}" aria-pressed="${S.todas||S.pautas.includes(p)}">${p}</button>`).join('')}</div>
+<p class="nota">${S.todas?'Acompanhando todas as pautas':n<3?`Escolha mais ${3-n}`:`${n} de 5 escolhidas`}</p>
+<div style="display:flex;justify-content:space-between;gap:12px"><button class="btn txt" id="volta">Voltar</button><button class="btn pri" id="prox" ${S.todas||n>=3?'':'disabled'}>Continuar</button></div>`}
+if(S.passo===3)corpo=`<h1>Para onde mandamos seu resumo?</h1><p class="vazio">Um e-mail por semana, toda segunda às 8h. Sem propaganda.</p>
+<form id="f" style="display:flex;flex-direction:column;gap:16px" novalidate>
+<div><label for="nome">Como podemos te chamar? <span class="nota">(opcional)</span></label><input id="nome" type="text" autocomplete="given-name" value="${esc(S.nome)}"></div>
+<div><label for="em">Seu e-mail</label><input id="em" type="email" autocomplete="email" required value="${esc(S.email)}"><p class="nota" id="erro" role="alert" style="color:#B3261E;margin-top:6px"></p></div>
+<label class="check"><input type="checkbox" id="lgpd" required><span>Concordo em receber o resumo semanal e com o uso dos meus dados só para isso, conforme a LGPD. Posso cancelar quando quiser.</span></label>
+<div style="display:flex;justify-content:space-between;gap:12px"><button type="button" class="btn txt" id="volta">Voltar</button><button class="btn pri" type="submit">Começar a receber</button></div></form>`;
+return `<section class="band"><div class="col"><p class="passo">Passo ${S.passo} de 3</p><div class="bar"><i style="width:${pct}%"></i></div>${corpo}</div></section>`},
+
+semana(){
+const secoes=[['pres','Presidente',true],['sen','Senadores',true],['dep','Deputados federais',true],['est','Deputados estaduais',false],['ver','Vereadores',false]];
+const card=p=>{if(p.c==='pres'){const ds=PRES.filter(d=>d.d>=SEM_INI&&d.d<=SEM_FIM&&minhas().includes(d.pa));
+return `<article class="card"><div class="pessoa"><div class="av">${ini(p.n)}</div><div style="flex:1"><h3>${p.n}</h3><p class="meta">${CARGO[p.c]} · ${p.p} · Brasil</p></div><button class="btn txt" style="min-height:44px;font-size:14px" data-unf="${p.id}" aria-label="Parar de ficar de olho em ${p.n}">Tirar o olho</button></div>
+${ds.length?`<p><b>${ds.length} decis${ds.length===1?'ão':'ões'}</b> sobre as suas pautas nessa semana.</p>${ds.map(linhaPres).join('')}`:'<p class="vazio">Nenhuma decisão sobre as suas pautas nessa semana.</p>'}
+<div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn sec" href="#perfil-${p.id}">Ver todas as decisões</a><a class="btn txt" href="#perfil-${p.id}" data-cobrar="1">Cobrar</a></div></article>`}
+const vs=VOT.filter(v=>v.casa===p.c&&v.d>=SEM_INI&&v.d<=SEM_FIM&&minhas().includes(v.pa));
+const fal=(FALAS[p.id]||[]).filter(x=>x[0]>=SEM_INI&&x[0]<=SEM_FIM&&minhas().includes(x[1]));
+const sil=silencios(p,'2026-10-24',SEM_FIM).slice(0,2);
+const pres=vs.filter(v=>voto(p.id,v.id)!=='falta').length;
+return `<article class="card"><div class="pessoa"><div class="av">${ini(p.n)}</div><div style="flex:1"><h3>${p.n}</h3><p class="meta">${CARGO[p.c]} · ${p.p} · ${onde(p)}</p></div><button class="btn txt" style="min-height:44px;font-size:14px" data-unf="${p.id}" aria-label="Parar de ficar de olho em ${p.n}">Tirar o olho</button></div>
+${vs.length?`<p><b>Votou em ${pres} de ${vs.length}</b> votaç${vs.length===1?'ão':'ões'} das suas pautas.</p>`:'<p class="vazio">Nenhuma votação das suas pautas esta semana.</p>'}
+${vs.map(v=>linhaVoto(p,v)).join('')}
+${fal.map(x=>`<div class="item">${V.fala.s}<div><p class="dt">${dt(x[0])} · ${x[1]}</p><p><b>Discursou</b> sobre ${x[1].toLowerCase()} no plenário.</p></div></div>`).join('')}
+${sil.length?`<div class="silencio">Faz 30 dias que não fala de <b>${sil.join(' nem de ').toLowerCase()}</b>. E aí, eleito?</div>`:''}
+<div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn sec" href="#perfil-${p.id}">Ver histórico completo</a><a class="btn txt" href="#perfil-${p.id}" data-cobrar="1">Cobrar</a></div></article>`};
+const picker=c=>{const q=(S.buscaC||'').toLowerCase();const op=POL.filter(p=>p.c===c&&!S.seg.includes(p.id)&&(!q||p.n.toLowerCase().includes(q)));
+return `<div class="card" style="gap:12px;border-style:dashed"><div><label for="bc-${c}">Em quem mais você quer ficar de olho?</label><input id="bc-${c}" class="buscaC" type="search" value="${esc(S.buscaC||'')}" placeholder="Nome ${c==='sen'?'do senador ou da senadora':c==='pres'?'':'do deputado ou da deputada'}${S.uf?' de '+S.uf:''}"></div>
+${op.map(p=>`<div class="pessoa"><div class="av">${ini(p.n)}</div><div style="flex:1"><p class="nome">${p.n}</p><p class="meta">${p.p}${p.m?' · '+p.m:''}</p></div><button class="btn sec" style="min-height:44px;padding:0 14px" data-seg="${p.id}">Ficar de olho</button></div>`).join('')||'<p class="vazio">Ninguém com esse nome por aqui.</p>'}
+<button class="btn txt" style="align-self:flex-start" data-pick="">Pronto</button></div>`};
+const sugestao=()=>{const p=pol('pr');return `<div class="card" style="border-style:dashed;gap:12px"><p class="nota">Sugestão para você</p><div class="pessoa"><div class="av">${ini(p.n)}</div><div style="flex:1"><p class="nome">${p.n}</p><p class="meta">${CARGO.pres} · ${p.p} · Brasil</p></div></div><p class="vazio">Sanções, vetos e medidas provisórias sobre as suas pautas, ligados ao que seus políticos votaram.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn pri" data-seg="pr">Ficar de olho</button><button class="btn txt" data-ocultar="pres">Agora não, ocultar cargo</button></div></div>`};
+const sec=([c,t,ok])=>{const seg=S.seg.map(pol).filter(p=>p.c===c);
+return `<section id="sec-${c}" style="display:flex;flex-direction:column;gap:14px;scroll-margin-top:140px">
+<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><h2 style="font-size:24px;flex:1">${t} <span class="nota" style="font-family:Inter">${ok?(seg.length?'de olho em '+seg.length:'ninguém no seu radar ainda'):'em breve'}</span></h2>
+${c==='pres'?`<button class="btn txt" style="min-height:44px" data-ocultar="pres">Ocultar cargo</button>`:ok&&S.picker!==c?`<button class="btn sec" style="min-height:44px" data-pick="${c}">+ ${seg.length?'Ficar de olho em mais um':'Ficar de olho em alguém'}</button>`:''}</div>
+${ok&&S.picker===c?picker(c):''}
+${!ok?`<div class="card" style="border-style:dashed"><p class="vazio">Logo, logo a gente fica de olho neles também. Enquanto isso, <a href="#cargos">veja o que esse cargo faz</a>.</p></div>`
+:seg.length?`<div class="grid2">${seg.map(card).join('')}</div>`
+:c==='pres'?sugestao():S.picker===c?'':`<div class="card" style="border-style:dashed;min-height:120px;justify-content:center"><p class="vazio">${`Por aqui, nenhum ${c==='sen'?'senador':'deputado federal'} sabe que você está de olho. Ainda.`}</p></div>`}
+</section>`};
+const vis=secoes.filter(([c])=>!S.ocultos.includes(c));
+return `<div class="cargobar"><div class="wrap chips" style="padding:8px max(5vw,16px)">${vis.map(([c,t,ok])=>`<button class="chip" data-ir="${c}">${t}${ok?` <span class="nota">${S.seg.map(pol).filter(p=>p.c===c).length}</span>`:''}</button>`).join('')}</div></div>
+<section class="band" style="padding-top:20px"><div class="wrap" style="display:flex;flex-direction:column;gap:28px">
+<div class="card" style="flex-direction:row;flex-wrap:wrap;align-items:center;gap:10px;padding:12px 16px"><p style="flex:1 1 240px;font-size:15px">Pautas: <b>${S.todas?'todas':S.pautas.join(', ')}</b>${S.ok?` · resumo em ${esc(S.email)}`:' · sem e-mail cadastrado'}</p><a class="btn sec" style="min-height:44px" href="#preferencias">Mudar preferências</a></div>
+<div><p class="nota">Fique de olho nessa semana · 16 a 22 de novembro</p><h1>Tô de olho em <span class="grifo">${S.seg.length} polític${S.seg.length===1?'o':'os'}</span></h1>${S.uf?'':'<p class="vazio" style="margin-top:8px"><a href="#cadastro" data-ed="1">Escolha seu estado</a> para ver os políticos de lá.</p>'}</div>
+${vis.map(sec).join('')}
+${S.ocultos.length?`<p class="nota">Cargo oculto: ${S.ocultos.map(c=>secoes.find(x=>x[0]===c)[1]).join(', ')} · <button class="btn txt" style="min-height:44px;font-size:13px;padding:0 4px" data-mostrar="1">Mostrar de novo</button></p>`:''}
+</div></section>`},
+
+cargos(){const C=[['Presidente da República','Federal · 4 anos · 1 no país',['Sanciona ou veta as leis aprovadas pelo Congresso','Edita medidas provisórias e decretos','Comanda os ministérios e o governo federal'],'Criar lei sozinho: medida provisória só continua valendo se o Congresso aprovar',true],
+['Deputado federal','Federal · 4 anos · 513 no país',['Cria e vota leis que valem para o país todo','Aprova o orçamento federal e indica emendas','Fiscaliza o governo federal'],'Administrar hospital, escola ou posto: isso é de prefeito, governador ou presidente',true],
+['Senador','Federal · 8 anos · 81 no país, 3 por estado',['Revisa e vota as leis aprovadas pela Câmara','Aprova indicações como ministros do STF','Representa o seu estado no Congresso'],'Executar obras ou contratar serviços diretamente',true],
+['Deputado estadual','Estadual · 4 anos',['Cria leis do estado','Aprova o orçamento estadual','Fiscaliza o governador'],'Leis federais, como as da aposentadoria do INSS',false],
+['Vereador','Municipal · 4 anos',['Cria leis da cidade','Aprova o orçamento da prefeitura','Fiscaliza o prefeito'],'Asfaltar rua ou contratar médico: quem executa é a prefeitura',false]];
+return `<section class="band"><div class="wrap" style="display:flex;flex-direction:column;gap:20px"><div><h1>O que cada cargo faz</h1><p class="vazio" style="margin-top:10px">Saber o que é responsabilidade de quem ajuda a cobrar a pessoa certa.</p></div>
+<div class="grid2">${C.map(([n,m,faz,nao,ok])=>`<article class="card"><h2 style="font-size:26px">${n}</h2><p class="nota">${m}</p>
+<h3>O que faz</h3>${faz.map(x=>`<div class="li">${V.sim.s}<p>${x}</p></div>`).join('')}
+<h3>O que não é com ele</h3><div class="li">${V.nao.s}<p>${nao}</p></div>
+<p class="nota">${ok?'Acompanhamento disponível':'Acompanhamento em breve'}</p></article>`).join('')}</div></div></section>`},
+
+perfil(id){const p=pol(id);if(!p)return views.semana();
+if(p.c==='pres'){const ds=PRES.filter(d=>S.filtroP==='todas'||d.pa===S.filtroP);
+return `<section class="band"><div class="col"><a class="btn txt" href="#semana" style="align-self:flex-start;padding:0">← Tô de olho</a>
+<div class="pessoa"><div class="av" style="width:64px;height:64px;font-size:20px">${ini(p.n)}</div><div><h1 style="font-size:32px">${p.n}</h1><p class="meta">${CARGO[p.c]} · ${p.p}</p></div></div>
+<div class="stats"><div class="card"><b>${PRES.filter(d=>d.t==='san').length}</b><span class="nota">leis sancionadas</span></div><div class="card"><b>${PRES.filter(d=>d.t==='vet').length}</b><span class="nota">vetos</span></div><div class="card"><b>${PRES.filter(d=>d.t==='mp').length}</b><span class="nota">medidas provisórias</span></div></div>
+<div class="card" style="gap:8px"><h3>Como funciona</h3><p class="vazio">O Congresso vota a lei e o presidente sanciona ou veta. Um veto pode ser derrubado pelo Congresso. Medidas provisórias valem na hora, mas precisam ser aprovadas pelo Congresso em até 120 dias.</p></div>
+<section class="card" id="cobrar" style="gap:10px"><h2 style="font-size:24px">E aí, presidente? Cobre direto</h2><p>Mande sua pergunta pelo Fala.BR, o canal de ouvidoria do governo federal, ou pelas redes oficiais da Presidência.</p><div><label for="msg">Mensagem pronta (edite como quiser)</label><textarea id="msg">${esc(`Olá. Sou eleitor(a) de ${S.uf||'meu estado'} e acompanho as decisões da Presidência. Gostaria de entender os motivos do veto à lei que permite usar parte do FGTS para quitar dívidas no cartão.`)}</textarea></div><div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="btn pri" id="copiar">Copiar mensagem</button><span class="nota" id="copiado" role="status"></span></div></section>
+<div class="chips">${['todas',...new Set(PRES.map(d=>d.pa))].map(k=>`<button class="chip" data-fp="${k}" aria-pressed="${S.filtroP===k}">${k==='todas'?'Todas':k}</button>`).join('')}</div>
+<h2 style="font-size:24px">Todas as decisões</h2>${ds.map(d=>`<div class="card">${linhaPres(d)}</div>`).join('')||'<p class="vazio">Nenhuma decisão nessa pauta.</p>'}
+<p class="nota">Decretos entram numa próxima versão.</p></div></section>`}
+const vs=VOT.filter(v=>v.casa===p.c&&(S.filtroP==='todas'||v.pa===S.filtroP)).sort((a,b)=>b.d.localeCompare(a.d));
+const todos=VOT.filter(v=>v.casa===p.c);const pres=Math.round(todos.filter(v=>voto(p.id,v.id)!=='falta').length/todos.length*100);
+const sil=silencios(p,'2026-08-24',SEM_FIM);
+return `<section class="band"><div class="col">
+<a class="btn txt" href="#semana" style="align-self:flex-start;padding:0">← Tô de olho</a>
+<div class="pessoa"><div class="av" style="width:64px;height:64px;font-size:20px">${ini(p.n)}</div><div><h1 style="font-size:32px">${p.n}</h1><p class="meta">${CARGO[p.c]} · ${p.p} · ${onde(p)}</p></div></div>
+<div class="stats"><div class="card"><b>${pres}%</b><span class="nota">presença em votações</span></div><div class="card"><b>${todos.filter(v=>minhas().includes(v.pa)).length}</b><span class="nota">votações nas suas pautas</span></div><div class="card"><b>${(FALAS[p.id]||[]).length}</b><span class="nota">discursos no período</span></div></div>
+<section class="card" id="cobrar" style="gap:14px"><h2 style="font-size:24px">E aí, ${p.n.split(' ')[0]}? Cobre direto</h2>
+<div class="contato"><div class="card"><span class="nota">E-mail do gabinete</span><b>${contato(p).email}</b></div><div class="card"><span class="nota">Telefone do gabinete</span><b>${contato(p).fone}</b></div><div class="card"><span class="nota">Redes sociais</span><b>${contato(p).rede}</b></div></div>
+<div><label for="msg">Mensagem pronta (edite como quiser)</label><textarea id="msg">${esc(msgPadrao(p))}</textarea></div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="btn pri" id="copiar">Copiar mensagem</button><a class="btn sec" id="mail" href="mailto:${contato(p).email}?subject=${encodeURIComponent('Pergunta de um eleitor')}">Abrir no e-mail</a><span class="nota" id="copiado" role="status"></span></div>
+<p class="nota">Também dá para ligar de graça: ${contato(p).geral}. Seja direto e respeitoso: mensagens educadas costumam ter resposta.</p></section>
+<div class="chips">${['todas',...new Set(todos.map(v=>v.pa))].map(k=>`<button class="chip" data-fp="${k}" aria-pressed="${S.filtroP===k}">${k==='todas'?'Todas':k}</button>`).join('')}</div>
+${(()=>{const tipos=['sim','nao','abst','falta'];const cor={sim:'var(--ink)',nao:'var(--mute)',abst:'var(--tinta)',falta:'var(--line)'};
+const g=Object.fromEntries(tipos.map(k=>[k,todos.filter(v=>voto(p.id,v.id)===k).sort((a,b)=>b.d.localeCompare(a.d))]));
+return `<section style="display:flex;flex-direction:column;gap:12px"><h2 style="font-size:24px">Como votou</h2><p class="vazio">${todos.length} votações nominais no período. Toque em cada tipo para ver em quais foram.</p>
+<div class="placar" role="img" aria-label="${tipos.map(k=>RT[k]+': '+g[k].length).join(', ')}">${tipos.map(k=>`<i style="width:${g[k].length/todos.length*100}%;background:${cor[k]}"></i>`).join('')}</div>
+${tipos.map(k=>`<details class="voto-det"><summary>${V[k].s}<span>${k==='sim'?'Votou a favor':k==='nao'?'Votou contra':k==='abst'?'Absteve-se':'Faltou'}</span><b>${g[k].length}</b></summary>${g[k].length?`<ul>${g[k].map(v=>`<li><span class="dt">${dt(v.d)} · ${v.pa}</span><br>${v.f} <span class="dt">(${v.r.toLowerCase()})</span></li>`).join('')}</ul>`:'<p class="vazio" style="margin:0 0 12px">Nenhuma.</p>'}</details>`).join('')}</section>`})()}
+<h2 style="font-size:24px">Histórico completo</h2>
+${sil.length?`<div class="silencio">Nos últimos 3 meses, nenhuma palavra sobre <b>${sil.slice(0,3).join(', ').toLowerCase()}</b>.</div>`:''}
+${vs.map(v=>`<div class="card">${linhaVoto(p,v)}</div>`).join('')||'<p class="vazio">Nenhuma votação nessa pauta.</p>'}
+<p class="nota">Votações simbólicas não registram o voto de cada parlamentar e não aparecem aqui.</p>
+</div></section>`}};
+
+views.eleicao=function(){
+const abas=[['balanco','Balanço do mandato'],['form','O que você pensa'],['comp','Comparativo']];
+const topo=`<div><p class="nota">Modo eleição</p><h1>Fica ou troca? <span class="grifo">Você decide.</span></h1><p class="vazio" style="margin-top:10px">Compare o que seus políticos fizeram com o que você pensa. Suas respostas ficam só neste aparelho, nunca são somadas às de outras pessoas e não viram recomendação de voto.</p></div>
+<div class="chips" role="tablist">${abas.map(([k,t])=>`<button class="chip" role="tab" data-aba="${k}" aria-pressed="${S.abaE===k}">${t}</button>`).join('')}</div>`;
+const segs=S.seg.map(pol).filter(p=>p&&p.c!=='pres');
+let corpo='';
+if(S.abaE==='balanco'){corpo=segs.length?`<div class="grid2">${segs.map(p=>{const vs=VOT.filter(v=>v.casa===p.c);const pres=Math.round(vs.filter(v=>voto(p.id,v.id)!=='falta').length/vs.length*100);
+const porPauta=[...new Set(vs.map(v=>v.pa))].filter(x=>minhas().includes(x)).map(pa=>{const o=vs.filter(v=>v.pa===pa).map(v=>voto(p.id,v.id));return `<p><b>${pa}:</b> ${o.map(x=>RT[x].toLowerCase()).join(', ')}</p>`}).join('');
+const sil=silencios(p,'2026-08-24',SEM_FIM);
+return `<article class="card"><div class="pessoa"><div class="av">${ini(p.n)}</div><div><h3>${p.n}</h3><p class="meta">${CARGO[p.c]} · ${p.p}</p></div></div>
+<div class="stats" style="grid-template-columns:repeat(2,minmax(0,1fr))"><div class="card"><b>${pres}%</b><span class="nota">presença em votações</span></div><div class="card"><b>${(FALAS[p.id]||[]).length}</b><span class="nota">discursos</span></div></div>
+<h3>Nas suas pautas</h3>${porPauta||'<p class="vazio">Nenhuma votação nas suas pautas.</p>'}
+${sil.length?`<div class="silencio">Ficou em silêncio sobre <b>${sil.slice(0,3).join(', ').toLowerCase()}</b>.</div>`:''}
+<a class="btn sec" href="#perfil-${p.id}">Ver histórico completo</a></article>`}).join('')}</div>`
+:`<div class="card" style="border-style:dashed"><p class="vazio">Você ainda não ficou de olho em nenhum parlamentar, então não há mandato para avaliar. Dá para ir direto para “O que você pensa”.</p></div>`;
+corpo+=`<button class="btn pri" style="align-self:flex-start" data-aba="form">Agora, o que você pensa?</button>`}
+if(S.abaE==='form'){const qs=VOT.filter(v=>v.casa===S.cargoE);const n=qs.filter(v=>S.resp[v.id]).length;
+corpo=`<div><label for="cargoE">Cargo que você quer avaliar</label><select id="cargoE"><option value="dep" ${S.cargoE==='dep'?'selected':''}>Deputado federal</option><option value="sen" ${S.cargoE==='sen'?'selected':''}>Senador</option></select></div>
+<p class="nota">${n} de ${qs.length} respondidas · as perguntas vêm de votações reais do mandato</p>
+<div>${qs.map(v=>`<div class="perg"><p class="dt">${v.pa}</p><p style="font-size:17px">Proposta: <b>${v.f}</b>. Você é a favor?</p>
+<div class="chips">${['sim','nao','tf'].map(o=>`<button class="chip" data-r="${v.id}:${o}" aria-pressed="${S.resp[v.id]===o}">${RT[o]}</button>`).join('')}
+<button class="chip" data-imp="${v.id}" aria-pressed="${!!S.imp[v.id]}">Importante pra mim</button></div>
+<button class="btn txt" style="align-self:flex-start;padding:0;min-height:44px" data-exp="${v.id}" aria-expanded="${!!S.abertos[v.id]}" aria-controls="exp-${v.id}">${S.abertos[v.id]?'Fechar explicação':'Entender a proposta'}</button>
+${S.abertos[v.id]&&EXP[v.id]?`<div class="card" id="exp-${v.id}" style="gap:8px;background:var(--bg)"><p><b>O que muda:</b> ${EXP[v.id][0]}</p><p><b>Quem é a favor diz:</b> ${EXP[v.id][1]}</p><p><b>Quem é contra diz:</b> ${EXP[v.id][2]}</p><p class="dt">Resultado no Congresso: ${v.r.toLowerCase()} em ${dt(v.d)} · <a href="${v.casa==='dep'?'https://dadosabertos.camara.leg.br/':'https://www12.senado.leg.br/dados-abertos'}">Texto completo na fonte oficial</a></p></div>`:''}</div>`).join('')}</div>
+<button class="btn pri" style="align-self:flex-start" data-aba="comp" ${n?'':'disabled'}>Ver comparativo</button>`}
+if(S.abaE==='comp'){const qs=VOT.filter(v=>v.casa===S.cargoE&&S.resp[v.id]);
+const todos=[...POL.filter(p=>p.c===S.cargoE),...CAND.filter(k=>k.c===S.cargoE)].sort((a,b)=>a.n.localeCompare(b.n));
+if(!S.cmp)S.cmp=[...todos.filter(p=>S.seg.includes(p.id)).map(p=>p.id),...CAND.filter(k=>k.c===S.cargoE).map(k=>k.id)].slice(0,3);
+const sel=todos.filter(p=>S.cmp.includes(p.id));
+const val=(p,v)=>CAND.includes(p)?respCand(p.id,v.id):voto(p.id,v.id);
+const conta=p=>{let c=0,t=0;qs.forEach(v=>{const u=S.resp[v.id];if(u==='tf')return;const w=S.imp[v.id]?2:1;t+=w;if(val(p,v)===u)c+=w});return [c,t]};
+corpo=!qs.length?`<div class="card" style="border-style:dashed"><p class="vazio">Responda pelo menos uma pergunta em “O que você pensa” para comparar.</p><button class="btn pri" style="align-self:flex-start" data-aba="form">Responder</button></div>`:
+`<div><p style="font-weight:600">Escolha até 3 para comparar <span class="nota">(em ordem alfabética)</span></p><div class="chips" style="margin-top:8px">${todos.map(p=>`<button class="chip" data-cmp="${p.id}" aria-pressed="${S.cmp.includes(p.id)}">${p.n}${S.seg.includes(p.id)?' · de olho':''}${CAND.includes(p)?' · candidato':''}</button>`).join('')}</div></div>
+<div class="tabela"><table><thead><tr><th>Tema</th><th>Você</th>${sel.map(p=>`<th>${p.n}<br><span class="nota">${CAND.includes(p)?'respostas ao questionário':'como votou no mandato'}</span></th>`).join('')}</tr></thead><tbody>
+${qs.map(v=>`<tr><td class="q">${v.f}${S.imp[v.id]?' <span class="nota">· importante</span>':''}</td><td><b>${RT[S.resp[v.id]]}</b></td>${sel.map(p=>{const x=val(p,v);return `<td class="${x===S.resp[v.id]?'ok':''}">${RT[x]}</td>`}).join('')}</tr>`).join('')}
+<tr><td class="q"><b>Concordou com você</b> <span class="nota">(temas importantes contam em dobro; “tanto faz” não conta)</span></td><td></td>${sel.map(p=>{const[c,t]=conta(p);return `<td><b>${c} de ${t}</b></td>`}).join('')}</tr>
+</tbody></table></div>
+<p class="nota">✓ = igual à sua resposta. Isto não é recomendação de voto nem pesquisa eleitoral: mostra só como cada um votou ou respondeu nos temas que você escolheu. Candidatos sem mandato aparecem com as respostas que enviaram ao nosso questionário. Bens declarados e plano de governo estão na ficha de cada candidato no TSE.</p>`}
+return `<section class="band"><div class="col" style="max-width:900px">${topo}${corpo}</div></section>`};
+views.preferencias=function(){if(!S.ok&&!S.seg.length)return views.entrar();
+return `<section class="band"><div class="col"><h1>Preferências</h1>
+<div class="card"><h3>Você está de olho em</h3><p>${S.seg.length?S.seg.map(pol).map(p=>p.n).join(', '):'Nenhum ainda'}</p><a class="btn sec" style="align-self:flex-start" href="#cadastro" data-ed="1">Mudar de quem estou de olho</a></div>
+${S.ocultos.length?`<div class="card"><h3>Cargos ocultos</h3><p>Presidente</p><button class="btn sec" style="align-self:flex-start" data-mostrar="1">Mostrar de novo</button></div>`:''}
+<div class="card"><h3>Pautas</h3><p>${S.todas?'Todas as pautas':S.pautas.join(', ')}</p><a class="btn sec" style="align-self:flex-start" href="#cadastro" data-ed="2">Mudar pautas</a></div>
+<div class="card"><h3>Resumo por e-mail</h3><p>${S.ok?`Toda segunda, às 8h, em <b>${esc(S.email)}</b>`:'Nenhum e-mail cadastrado'}</p><a class="btn sec" style="align-self:flex-start" href="#cadastro" data-ed="3">${S.ok?'Mudar e-mail':'Cadastrar e-mail'}</a></div>
+<div class="card"><h3>Seus dados</h3><p class="vazio">Guardamos só seu e-mail, estado, quem você acompanha e suas pautas. Nunca em quem você votou.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn sec" id="sair">Sair deste aparelho</button><button class="btn txt" id="apagar">Apagar minha conta</button></div><p class="nota" id="apagarMsg" role="status"></p></div>
+</div></section>`};
+views.entrar=function(){return `<section class="band"><div class="col"><h1>Entrar</h1><p class="vazio">Sem senha: digite seu e-mail e enviamos um link de acesso. É o mesmo link que vem no resumo de toda segunda.</p>
+<form id="fEntrar" style="display:flex;flex-direction:column;gap:14px" novalidate><div><label for="emE">Seu e-mail</label><input id="emE" type="email" autocomplete="email" required></div><button class="btn pri" type="submit" style="align-self:flex-start">Enviar link de acesso</button><p class="nota" id="msgE" role="status"></p></form>
+<p class="nota">Ainda não tem cadastro? <a href="#cadastro">Comece aqui</a>.</p></div></section>`};
+function vazioSemana(){return `<section class="band"><div class="col" style="align-items:flex-start"><h1>Você ainda não está de olho em ninguém</h1><p class="vazio">Escolha os políticos e as pautas para montar sua semana.</p><a class="btn pri" href="#cadastro">Escolher agora</a></div></section>`}
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+function render(){document.documentElement.style.setProperty('--hh',document.querySelector('header').offsetHeight+'px');const nc=document.getElementById('navConta');nc.textContent=S.ok?'Preferências':'Entrar';nc.href=S.ok?'#preferencias':'#entrar';nc.dataset.v=S.ok?'preferencias':'entrar';const h=(location.hash||'#inicio').slice(1);let v=h.startsWith('perfil-')?'perfil':(views[h]?h:'inicio');
+app.innerHTML=v==='perfil'?views.perfil(h.slice(7)):views[v]();
+document.querySelectorAll('nav a').forEach(a=>a.toggleAttribute('aria-current',a.dataset.v===v||(v==='perfil'&&a.dataset.v==='semana')));
+document.querySelectorAll('nav a[aria-current]').forEach(a=>a.setAttribute('aria-current','page'))}
+const rerender=()=>{render();salva()};
+
+app.addEventListener('click',e=>{const t=e.target.closest('button,a');if(!t)return;
+if(t.dataset.seg){const id=t.dataset.seg;S.seg=S.seg.includes(id)?S.seg.filter(x=>x!==id):[...S.seg,id];rerender()}
+else if(t.dataset.pa){const p=t.dataset.pa;if(S.todas){S.todas=false;S.pautas=[p]}else if(S.pautas.includes(p))S.pautas=S.pautas.filter(x=>x!==p);else if(S.pautas.length<5)S.pautas=[...S.pautas,p];rerender()}
+else if(t.id==='todas'){S.todas=!S.todas;rerender()}
+else if(t.id==='prox'){S.passo++;rerender();scrollTo(0,0)}
+else if(t.id==='volta'){S.passo--;rerender()}
+else if(t.dataset.fc){S.filtroC=t.dataset.fc;render()}
+else if(t.dataset.fp){S.filtroP=t.dataset.fp;render()}
+else if(t.dataset.ed){S.passo=+t.dataset.ed}
+else if(t.dataset.cobrar){S.irCobrar=true}
+else if(t.dataset.aba){S.abaE=t.dataset.aba;render();scrollTo(0,0)}
+else if(t.dataset.r){const[q,o]=t.dataset.r.split(':');S.resp[q]=S.resp[q]===o?undefined:o;render()}
+else if(t.dataset.exp){S.abertos[t.dataset.exp]=!S.abertos[t.dataset.exp];render()}
+else if(t.dataset.imp){S.imp[t.dataset.imp]=!S.imp[t.dataset.imp];render()}
+else if(t.dataset.cmp){const id=t.dataset.cmp;S.cmp=S.cmp.includes(id)?S.cmp.filter(x=>x!==id):S.cmp.length<3?[...S.cmp,id]:S.cmp;render()}
+else if(t.dataset.ocultar){S.ocultos=[...new Set([...S.ocultos,t.dataset.ocultar])];S.seg=S.seg.filter(x=>x!=='pr');rerender()}
+else if(t.dataset.mostrar){S.ocultos=[];rerender()}
+else if(t.dataset.unf){S.seg=S.seg.filter(x=>x!==t.dataset.unf);rerender()}
+else if(t.dataset.pick!==undefined){S.picker=t.dataset.pick||null;S.buscaC='';render();const i=document.querySelector('.buscaC');if(i)i.focus()}
+else if(t.dataset.ir){const el=document.getElementById('sec-'+t.dataset.ir);if(el)el.scrollIntoView({behavior:'smooth'})}
+else if(t.id==='sair'){S={...S,seg:[],email:'',nome:'',ok:false,uf:''};try{localStorage.removeItem('eaieleito')}catch(err){}location.hash='#inicio'}
+else if(t.id==='apagar'){document.getElementById('apagarMsg').textContent='Na versão real, isto apaga sua conta e seus dados dos nossos servidores, como prevê a LGPD. Aqui no protótipo, use “Sair deste aparelho”.'}
+else if(t.id==='copiar'){const m=document.getElementById('msg').value,o=document.getElementById('copiado');try{navigator.clipboard.writeText(m).then(()=>o.textContent='Mensagem copiada. Cole no e-mail ou na rede social.',()=>o.textContent='Não deu para copiar. Selecione o texto e copie.')}catch(err){o.textContent='Não deu para copiar. Selecione o texto e copie.'}}
+else if(t.id==='mail'){t.href=t.href.split('&body=')[0]+'&body='+encodeURIComponent(document.getElementById('msg').value)}});
+app.addEventListener('change',e=>{if(e.target.id==='uf'){S.uf=e.target.value;rerender()}if(e.target.id==='cargoE'){S.cargoE=e.target.value;S.cmp=null;render()}});
+app.addEventListener('input',e=>{if(e.target.classList.contains('buscaC')){S.buscaC=e.target.value;const pos=e.target.selectionStart,id=e.target.id;render();const b=document.getElementById(id);b.focus();b.setSelectionRange(pos,pos);return}if(e.target.id==='busca'){S.busca=e.target.value;const pos=e.target.selectionStart;render();const b=document.getElementById('busca');b.focus();b.setSelectionRange(pos,pos)}});
+app.addEventListener('submit',e=>{e.preventDefault();if(e.target.id==='fEntrar'){const v=document.getElementById('emE').value.trim();document.getElementById('msgE').textContent=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)?`Se ${v} estiver cadastrado, o link chega em instantes. No protótipo, nenhum e-mail é enviado.`:'Confira o e-mail: parece que falta algo.';return}const em=document.getElementById('em').value.trim(),lg=document.getElementById('lgpd').checked,er=document.getElementById('erro');
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){er.textContent='Confira o e-mail: parece que falta algo.';return}
+if(!lg){er.textContent='Para receber o resumo, marque a concordância com o uso dos dados.';return}
+S.email=em;S.nome=document.getElementById('nome').value.trim();S.ok=true;S.passo=4;rerender();scrollTo(0,0)});
+addEventListener('hashchange',()=>{if(location.hash==='#cadastro'&&S.passo===4)S.passo=1;S.filtroP='todas';S.picker=null;render();const c=S.irCobrar&&document.getElementById('cobrar');S.irCobrar=false;if(c)c.scrollIntoView();else scrollTo(0,0)});
+render();
+}
+</script>
+</body>
+</html>
