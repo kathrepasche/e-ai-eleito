@@ -7,14 +7,20 @@ Uso:
     python coletor.py --inicio 2026-11-16 --fim 2026-11-22
 
 Validado contra as APIs reais em 23/11/2026. Votações simbólicas e secretas
-não têm voto individual (saem com "nominal": false). A Câmara só lista quem
-votou: para saber quem faltou, falta cruzar com os deputados em exercício.
+não têm voto individual (saem com "nominal": false).
+
+Valores de "voto": sim, nao, abst, obstrucao, art17 (presidente da Câmara),
+presidente (presidente da sessão no Senado), nao_votou (estava na sessão e não
+votou), falta (não compareceu / não registrou presença) e ausencia_justificada
+(Senado: missão, atividade parlamentar ou licença; motivo em "voto_oficial").
+A Câmara só lista quem votou; os ausentes são completados cruzando com os
+deputados em exercício na data e com a presença registrada na sessão.
 """
 
 import argparse
 import json
 import time
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 import requests
@@ -37,6 +43,17 @@ VOTO_NORMALIZADO = {
     "p-nrv": "nao_votou",
     # Senado: quem preside a sessão não vota (art. 51 do Regimento).
     "presidente (art. 51 risf)": "presidente",
+    # Senado: não compareceu, sem justificativa registrada.
+    "ncom": "falta",
+    # Senado: ausências justificadas (missão, atividade parlamentar, licenças).
+    # O código original fica em "voto_oficial" para o app explicar o motivo.
+    "mis": "ausencia_justificada",
+    "ap": "ausencia_justificada",
+    "ls": "ausencia_justificada",
+    "lp": "ausencia_justificada",
+    "lg": "ausencia_justificada",
+    "lap": "ausencia_justificada",
+    "lc": "ausencia_justificada",
 }
 
 
@@ -60,22 +77,77 @@ def normaliza_voto(texto):
 
 # ---------- Câmara ----------
 
+def paginas_camara(caminho, params=None):
+    """Junta todas as páginas de um endpoint da Câmara (máx. 100 itens cada)."""
+    params = dict(params or {}, itens=100)
+    itens, pagina = [], 1
+    while True:
+        resposta = get_json(f"{CAMARA}/{caminho}", dict(params, pagina=pagina)) or {}
+        itens += resposta.get("dados", [])
+        if not any(l.get("rel") == "next" for l in resposta.get("links", [])):
+            return itens
+        pagina += 1
+
+
+_cache_exercicio, _cache_presenca = {}, {}
+
+
+def deputados_em_exercicio(dia):
+    """Deputados em exercício na data (titulares e suplentes): {id: dados}."""
+    if dia not in _cache_exercicio:
+        lista = paginas_camara("deputados", {"dataInicio": dia, "dataFim": dia})
+        _cache_exercicio[dia] = {d["id"]: d for d in lista}
+    return _cache_exercicio[dia]
+
+
+def presentes_na_sessao(id_evento):
+    """IDs dos deputados que registraram presença na sessão (evento)."""
+    if not id_evento:
+        return None
+    if id_evento not in _cache_presenca:
+        resposta = get_json(f"{CAMARA}/eventos/{id_evento}/deputados")
+        _cache_presenca[id_evento] = (
+            None if resposta is None else {d["id"] for d in resposta.get("dados", [])}
+        )
+    return _cache_presenca[id_evento]
+
+
+def completa_ausentes_camara(votos, dia, id_evento):
+    """A Câmara só lista quem votou. Acrescenta quem estava em exercício e não votou.
+
+    - "nao_votou": registrou presença na sessão, mas não votou nesta votação.
+    - "falta": não registrou presença na sessão.
+    A API não informa ausências justificadas (missão, licença) da Câmara, então
+    "falta" aqui quer dizer só "não registrou presença", sem julgar o motivo.
+    """
+    votaram = {v["politico_id"] for v in votos}
+    presentes = presentes_na_sessao(id_evento)
+    ausentes = []
+    for id_dep, d in deputados_em_exercicio(dia).items():
+        if f"dep-{id_dep}" in votaram:
+            continue
+        estava = presentes is not None and id_dep in presentes
+        ausentes.append({
+            "politico_id": f"dep-{id_dep}",
+            "nome": d.get("nome"),
+            "partido": d.get("siglaPartido"),
+            "uf": d.get("siglaUf"),
+            "voto": "nao_votou" if estava else "falta",
+            "voto_oficial": None,
+            "presenca_sessao": estava if presentes is not None else None,
+        })
+    return votos + sorted(ausentes, key=lambda a: a["nome"] or "")
+
+
 def votacoes_camara(inicio, fim):
     """Lista votações do Plenário da Câmara no período (datas AAAA-MM-DD)."""
-    # A API devolve no máximo 100 itens por página, então seguimos o link "next".
-    votacoes, pagina = [], 1
-    while True:
-        resposta = get_json(f"{CAMARA}/votacoes", {
-            "dataInicio": inicio, "dataFim": fim,
-            "idOrgao": 180,  # Plenário
-            "itens": 100, "pagina": pagina,
-            "ordem": "DESC", "ordenarPor": "dataHoraRegistro",
-        }) or {}
-        votacoes += resposta.get("dados", [])
-        links = {l.get("rel"): l.get("href") for l in resposta.get("links", [])}
-        if "next" not in links:
-            return votacoes
-        pagina += 1
+    # Na API da Câmara o dataFim é exclusivo: somamos um dia para incluir o último.
+    fim_exclusivo = (date.fromisoformat(fim) + timedelta(days=1)).isoformat()
+    return paginas_camara("votacoes", {
+        "dataInicio": inicio, "dataFim": fim_exclusivo,
+        "idOrgao": 180,  # Plenário
+        "ordem": "DESC", "ordenarPor": "dataHoraRegistro",
+    })
 
 
 def votos_camara(id_votacao):
@@ -100,14 +172,19 @@ def coleta_camara(inicio, fim):
     saida = []
     for v in votacoes_camara(inicio, fim):
         votos = votos_camara(v["id"])
+        nominal = bool(votos)
+        dia = (v.get("dataHoraRegistro") or v.get("data") or "")[:10]
+        if nominal:
+            id_evento = (v.get("uriEvento") or "").rstrip("/").rsplit("/", 1)[-1] or None
+            votos = completa_ausentes_camara(votos, dia, id_evento)
         aprovacao = v.get("aprovacao")
         saida.append({
             "casa": "camara",
             "id": f"camara-{v['id']}",
-            "data": (v.get("dataHoraRegistro") or v.get("data") or "")[:10],
+            "data": dia,
             "descricao_oficial": v.get("descricao"),
             "aprovada": None if aprovacao is None else bool(aprovacao),
-            "nominal": bool(votos),
+            "nominal": nominal,
             "votos": votos,
             "fonte": f"{CAMARA}/votacoes/{v['id']}",
             "fonte_pagina": pagina_camara(v),
