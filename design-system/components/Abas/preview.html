@@ -1,0 +1,27 @@
+<!-- @dsCard group="Layout e organização" height=251 subtitle="Abas" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Abas</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<div aria-label="Projeto Praça Central" class="tr-tabs" role="tablist">
+<button aria-controls="p-abas-p1" aria-selected="true" class="tr-tab" id="p-abas-t1" role="tab" tabindex="0" type="button">Visão geral</button>
+<button aria-controls="p-abas-p2" aria-selected="false" class="tr-tab" id="p-abas-t2" role="tab" tabindex="-1" type="button">Atividade</button>
+<button aria-controls="p-abas-p3" aria-selected="false" class="tr-tab" id="p-abas-t3" role="tab" tabindex="-1" type="button">Arquivos <span class="tr-badge">12</span></button>
+<button aria-controls="p-abas-p4" aria-selected="false" class="tr-tab" id="p-abas-t4" role="tab" tabindex="-1" type="button">Membros</button>
+</div>
+<section aria-labelledby="p-abas-t1" class="tr-tabpanel" id="p-abas-p1" role="tabpanel" tabindex="0">
+<h3 class="tr-subtitle">Visão geral</h3>
+<p>Reforma da praça com previsão de entrega em março de 2027. Etapa atual: licitação.</p>
+</section>
+<section aria-labelledby="p-abas-t2" class="tr-tabpanel" hidden="" id="p-abas-p2" role="tabpanel" tabindex="0"></section>
+<section aria-labelledby="p-abas-t3" class="tr-tabpanel" hidden="" id="p-abas-p3" role="tabpanel" tabindex="0"></section>
+<section aria-labelledby="p-abas-t4" class="tr-tabpanel" hidden="" id="p-abas-p4" role="tabpanel" tabindex="0"></section>
+</div>
+</body>
+</html>

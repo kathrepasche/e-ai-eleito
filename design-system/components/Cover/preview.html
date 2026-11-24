@@ -1,0 +1,43 @@
+<!-- @dsCard height=320 -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>E aí, Eleito?</title>
+<style>
+  html,body{margin:0;background:var(--t-bg)}
+  .cover{position:relative;width:960px;height:320px;overflow:hidden;background:var(--t-bg)}
+  .cover svg{position:absolute;inset:0}
+  .tinta{fill:var(--g-brand-60)}
+  .ink{fill:var(--t-fg-1)}
+  .grifo{fill:var(--t-mark)}
+  .tint{fill:var(--t-brand-subtle)}
+  .papel{fill:var(--g-grey-2)}
+  .risco{stroke:var(--t-fg-1);stroke-width:var(--stroke-thicker);stroke-linecap:round}
+  .text{position:absolute;left:var(--sp-1200);bottom:var(--sp-1000);max-width:440px}
+  .name{margin:0;font:700 96px/.95 var(--font-display);letter-spacing:-.02em;color:var(--t-fg-1)}
+  .tag{margin:var(--sp-300) 0 0;font:400 14px/20px var(--font-sans);color:var(--t-fg-3)}
+</style></head>
+<body>
+<div class="cover" id="root">
+  <svg viewBox="0 0 960 320" width="960" height="320" aria-hidden="true">
+    <!--
+      blocos: g-brand-60 (azul-tinta) 240x320 sangrando em cima e embaixo; t-fg-1 (grafite) 240x160 no canto superior direito; t-mark (grifo) balão 208x120 com cauda; t-brand-subtle 240x160 embaixo à direita; cantos r-lg (18px) e r-2xl (28px)
+      arranjo: uma laje alta (a urna) com satélites, a partir de x=480, sangrando no topo, na direita e embaixo
+      padrão: linhas de texto de uma tela (pílulas papel, r-pill) sobre a laje azul, uma delas riscada como o FIM; o motivo literal é a tela da urna depois do voto
+      passos: pílulas de 16px de altura a cada sp-1000 (40px), larguras múltiplas de sp-1200; raio da pílula metade do lado curto (8px)
+    -->
+    <rect class="tinta" x="480" y="-28" width="240" height="376" rx="28"/>
+    <rect class="ink" x="736" y="-18" width="240" height="160" rx="18"/>
+    <rect class="tint" x="736" y="158" width="240" height="180" rx="18"/>
+    <rect class="papel" x="520" y="48" width="144" height="16" rx="8"/>
+    <rect class="papel" x="520" y="88" width="96" height="16" rx="8"/>
+    <rect class="papel" x="520" y="128" width="144" height="16" rx="8" opacity=".55"/>
+    <line class="risco" x1="512" y1="136" x2="676" y2="136"/>
+    <path class="grifo" d="M622 184H812A18 18 0 0 1 830 202V268A18 18 0 0 1 812 286H690L656 314V286H622A18 18 0 0 1 604 268V202A18 18 0 0 1 622 184Z"/>
+  </svg>
+  <div class="text">
+    <h1 class="name">E aí,<br>Eleito?</h1>
+    <p class="tag">Na urna aparece FIM. Pra gente, é só o começo.</p>
+  </div>
+</div>
+</body>
+</html>

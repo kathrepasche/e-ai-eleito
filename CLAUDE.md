@@ -6,7 +6,7 @@ Este arquivo resume a conversa de produto e design em que o projeto nasceu (clau
 Kathleen, Group Product Designer, no Brasil. Fala português; responda em português. Ela decide produto e design; prefere ver as coisas funcionando e iterar rápido.
 
 ## O produto
-**E aí, Eleito?** — plataforma cívica, apartidária, para o eleitor "ficar de olho" nos políticos que escolheu. Toda segunda, um e-mail personalizado em linguagem simples conta o que eles fizeram e o que deixaram de fazer nas pautas da pessoa. No site, a área **Tô de olho** guarda o histórico completo.
+**E aí, Eleito?** — plataforma cívica, apartidária, para o eleitor "ficar de olho" nos políticos que escolheu. Toda segunda, um e-mail personalizado em linguagem simples conta o que eles fizeram e o que deixaram de fazer nas pautas da pessoa. No site, a área **Tô de olho** é atualizada no mesmo dia e guarda o histórico completo de cada um.
 
 Frase de lançamento: "Na urna aparece FIM. Pra gente, é só o começo."
 Público: qualquer eleitor, inclusive leigos em política (teste de clareza: alguém de 60+ ou com pouca escolaridade precisa entender).
@@ -19,7 +19,7 @@ Público: qualquer eleitor, inclusive leigos em política (teste de clareza: alg
 - Amostra enviesada (16 de SC, 20 com superior completo). Falta testar disposição a pagar.
 
 ## Decisões já tomadas (não reabrir sem a Kathleen)
-- **Canais do MVP:** site + e-mail semanal (Brevo). WhatsApp e SMS foram avaliados e descartados nesta fase (custo; política da Meta proíbe entidades que oferecem serviços relacionados à política).
+- **Canais do MVP:** site + e-mail semanal (Brevo). A ideia de lançar só com o site foi avaliada e descartada em 24/11/2026: o e-mail vai até a pessoa (58% só acompanham "quando aparece na mídia"). WhatsApp e SMS foram descartados nesta fase (custo; política da Meta proíbe entidades que oferecem serviços relacionados à política).
 - **Só resumo personalizado**, nunca resumo geral.
 - **Acesso sem senha** por link mágico; sessão longa; dados no servidor (Supabase sugerido).
 - **Cargos:** deputado federal, senador e presidente. Presidente aparece como **sugestão** ("Ficar de olho" ou "Agora não, ocultar cargo", restaurável em Preferências). Deputado estadual e vereador: só a explicação do cargo ("em breve").
@@ -37,9 +37,19 @@ Público: qualquer eleitor, inclusive leigos em política (teste de clareza: alg
 - No tema escuro, texto claro sobre o grifo amarelo leva contorno preto (`--contorno`).
 - Tom de voz: conversa direta e bem-humorada; o humor recai sobre o comportamento ("faltou", "sumiu"), nunca sobre a pessoa. Fatos, não adjetivos. Usar "ficar de olho" em vez de "seguir". "Tô de olho" é nome de área interna, não marca (existe um TCC "Tô De Olho" no mesmo nicho).
 
+
+## Design system (obrigatório na interface)
+O design system **E aí, Eleito?** está em `design-system/` (cópia do publicado no claude.ai em 24/11/2026). Leia `design-system/README.md` antes de qualquer tela.
+- Carregue `design-system/tokens.css` e `design-system/components/bundle.css`.
+- Componentes genéricos: classes `.tr-*` (kit do Trama). Componentes cívicos: `.ee-*` (grifo, ícones de voto, card do político, aviso de silêncio, barra de cargos, chip de pauta, placar, explicação da proposta, cobrar).
+- Cada componente tem guia em `design-system/components/<Nome>/README.md` e exemplo em `preview.html`.
+- Use só tokens alias (`t-*`, `sp-*`, `r-*`, `e-*`, `c-*`), nunca os globais `g-*` nem cores soltas.
+- Regras da marca e decisões EE1 a EE8: `design-system/11-marca-e-neutralidade.md`.
+- O protótipo `site/index.html` ainda NÃO usa o design system; migrar é uma das primeiras tarefas (ex.: o anel de foco amarelo no tema claro reprova contraste; o do sistema, `t-focus`, passa).
+
 ## O que existe no repositório
 - `site/index.html` — protótipo completo, HTML único, dados fictícios (Partido A–G, nomes inventados). Rotas por hash: #inicio, #cadastro, #semana (Tô de olho), #perfil-<id>, #cargos, #eleicao, #preferencias, #entrar.
-- `email/email-sua-semana.html` — modelo do e-mail (sintaxe de variáveis do Brevo).
+- `email/email-sua-semana.html` — modelo do e-mail semanal (sintaxe de variáveis do Brevo). Ainda não usa o design system.
 - `coletor/coletor.py` — busca votações da Câmara (API v2) e do Senado (API legada) e salva JSON. Validado contra as APIs reais em 23/11/2026 (semana 16–22/11 e outubro/2026). O que aprendemos:
   - A Câmara devolve no máximo 100 itens por página; o coletor segue o link `next`.
   - Muitas votações da Câmara são simbólicas (sem voto individual) e alguns registros ("Alteração do Regime de Tramitação") dão 404 no detalhe; ambos saem com `nominal: false`.
@@ -47,9 +57,24 @@ Público: qualquer eleitor, inclusive leigos em política (teste de clareza: alg
   - Na Câmara o `dataFim` é exclusivo; o coletor soma um dia.
   - **"Faltou":** a Câmara só lista quem votou. O coletor completa os 513 cruzando com os deputados em exercício na data e com a presença na sessão. No Senado vêm os 81.
   - **Decisão (Kathleen, 23/11/2026): tudo que não é voto aparece como "faltou"** (`voto = "falta"`). O detalhe fica em `falta_detalhe`, só para transparência: `nao_compareceu` (Câmara: sem presença na sessão; Senado: `NCom`), `nao_votou` (estava na sessão e não votou; Senado: `P-NRV`) e `ausencia_justificada` (Senado: `MIS`, `AP`, `LS`, `LP`…, código em `voto_oficial`). A API da Câmara não informa ausência justificada.
-- `linguagem/` — pipeline de linguagem simples (passo 2). `simplificar.py` lê o JSON do coletor, busca a ementa oficial (Câmara `/proposicoes`, Senado `/materia`) e chama a API do Claude (`claude-opus-5-5`, saída em JSON estruturado, fallback de recusa ligado). Gera `saida/revisao-*.md` para revisão humana e `saida/textos-*.json` com `revisado: false`. As regras de escrita ficam em `prompt_sistema.md` (é a metodologia pública: mudanças ali são decisão de produto). O script alerta quando os argumentos a favor e contra diferem mais de 20% em tamanho. Precisa de `ANTHROPIC_API_KEY` (variável de ambiente; segredos de rede não funcionam para hosts da Anthropic). **Ainda não foi rodado com a IA**: só o contexto (`--sem-ia`) foi validado.
+- `linguagem/` — pipeline de linguagem simples (passo 2). `simplificar.py` lê o JSON do coletor, busca a ementa oficial (Câmara `/proposicoes`, Senado `/materia`) e chama a API do Claude (`claude-sonnet-5-5`, saída em JSON estruturado, fallback de recusa ligado; ainda uma chamada por votação, falta passar para a Batch API). Gera `saida/revisao-*.md` para revisão humana e `saida/textos-*.json` com `revisado: false`. As regras de escrita ficam em `prompt_sistema.md` (é a metodologia pública: mudanças ali são decisão de produto). O script alerta quando os argumentos a favor e contra diferem mais de 20% em tamanho. Precisa de `ANTHROPIC_API_KEY` (variável de ambiente; segredos de rede não funcionam para hosts da Anthropic). **Ainda não foi rodado com a IA**: só o contexto (`--sem-ia`) foi validado.
 - `db/schema.sql` — esquema Supabase com RLS; guarda o mínimo; apagar o usuário apaga tudo.
 - `docs/decisoes.md` — resumo das decisões.
+
+## Como a atualização funciona (pipeline)
+1. **Coleta (todo dia, de madrugada):** GitHub Actions agendado roda `coletor/coletor.py` e grava votações e votos novos no Supabase. Sem IA. Rodar diariamente também evita a pausa do Supabase gratuito (pausa após 1 semana sem atividade).
+2. **Explicação (uma vez por votação, não por usuário):** para cada votação nova, a IA gera `frase_simples`, `o_que_muda`, `a_favor_diz`, `contra_diz` e `pauta`. Usar a Batch API (50% de desconto), pois nada precisa ser instantâneo.
+   - Texto: **Claude Sonnet 5.5** (`claude-sonnet-5-5`) — qualidade e neutralidade importam.
+   - Classificação de pauta: **Claude Haiku 5.5** (`claude-haiku-5-5`).
+   - Instruções do prompt: linguagem para leigos, sem adjetivos, argumentos a favor e contra com o mesmo tamanho, nunca opinar.
+3. **Revisão humana:** nada aparece no site sem `revisado = true`.
+4. **Página Tô de olho e e-mail semanal:** montados por código (sem IA), cruzando quem a pessoa segue com as votações revisadas. Toda segunda a página é atualizada e o e-mail sai pelo Brevo.
+
+## Custos estimados (piloto)
+- Claude API: ~US$ 1–5/mês (cresce com o número de votações, não de usuários).
+- Supabase, Vercel, GitHub Actions: plano gratuito.
+- Domínio .com.br: ~R$ 40/ano.
+- Maior custo real: tempo de revisão humana semanal.
 
 ## Próximos passos (em ordem)
 1. Rodar o coletor com uma semana real e corrigir o que quebrar.
@@ -57,7 +82,7 @@ Público: qualquer eleitor, inclusive leigos em política (teste de clareza: alg
 3. Classificar cada votação em uma pauta (metodologia pública).
 4. Criar o projeto Supabase, rodar o schema, ligar o login por link mágico.
 5. Transformar o protótipo em app real conectado ao banco, mantendo design e textos.
-6. Job semanal (segunda, 8h) que monta e envia o e-mail de cada pessoa pelo Brevo.
+6. Job semanal (segunda, 8h) que atualiza a página Tô de olho e envia o e-mail de cada pessoa pelo Brevo; medir abertura do e-mail e retorno ao site.
 7. Lista de espera e lançamento antes de 1º/2/2027 (posse do novo Congresso).
 
 ## Pendências fora do código

@@ -1,0 +1,31 @@
+<!-- @dsCard group="Menus e ações" height=454 subtitle="Menus" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Menus</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<div class="tr-stage">
+<div class="tr-stack">
+<button aria-controls="p-menus-demo" aria-expanded="true" aria-haspopup="menu" class="tr-btn" id="p-menus-trigger" type="button">Ações do projeto <span aria-hidden="true">▴</span></button>
+<div aria-labelledby="p-menus-trigger" class="tr-menu" id="p-menus-demo" role="menu">
+<div class="tr-menu__group" role="presentation">Projeto</div>
+<button role="menuitem" type="button">Renomear…<kbd>F2</kbd></button>
+<button role="menuitem" type="button">Duplicar projeto<kbd>Ctrl+D</kbd></button>
+<button role="menuitem" type="button">Mover para pasta…</button>
+<hr role="separator"/>
+<div class="tr-menu__group" role="presentation">Ordenar por</div>
+<button aria-checked="true" role="menuitemradio" type="button">Data de criação <span aria-hidden="true">✓</span></button>
+<button aria-checked="false" role="menuitemradio" type="button">Nome (A a Z)</button>
+<hr role="separator"/>
+<button class="tr-danger-item" role="menuitem" type="button">Excluir projeto…</button>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

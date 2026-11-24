@@ -1,0 +1,31 @@
+<!-- @dsCard group="Apresentação" height=292 subtitle="Toasts" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Toasts</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<div class="tr-stack">
+<div class="tr-toast" role="status">
+<span aria-hidden="true" class="tr-msg__icon">i</span>
+<div><p class="tr-toast__title">Relatório movido para Arquivados</p></div>
+<div class="tr-row"><button class="tr-btn tr-btn--subtle tr-btn--sm" type="button">Desfazer</button><button aria-label="Fechar aviso" class="tr-btn tr-btn--subtle tr-btn--icon tr-btn--sm" type="button">✕</button></div>
+</div>
+<div class="tr-toast" role="status">
+<span aria-hidden="true" class="tr-spinner"></span>
+<div><p class="tr-toast__title">Enviando 6 arquivos</p><p>2 de 6 concluídos</p></div>
+<button class="tr-btn tr-btn--subtle tr-btn--sm" type="button">Cancelar</button>
+</div>
+<div class="tr-toast" role="alert">
+<span aria-hidden="true" class="tr-msg__icon">!</span>
+<div><p class="tr-toast__title">Não foi possível salvar o rascunho</p><p>A conexão caiu. Tente de novo em instantes.</p></div>
+<button aria-label="Fechar erro" class="tr-btn tr-btn--subtle tr-btn--icon tr-btn--sm" type="button">✕</button>
+</div>
+</div>
+</div>
+</body>
+</html>

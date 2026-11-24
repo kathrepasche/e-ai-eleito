@@ -1,0 +1,41 @@
+<!-- @dsCard group="Menus e ações" height=320 subtitle="Botões" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Botões</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<div class="tr-stack">
+<div class="tr-btn-group">
+<button class="tr-btn tr-btn--primary" type="button">Salvar alterações</button>
+<button class="tr-btn" type="button">Visualizar</button>
+<button class="tr-btn tr-btn--subtle" type="button">Cancelar</button>
+</div>
+<div class="tr-btn-group">
+<button class="tr-btn tr-btn--sm" type="button">Densidade alta</button>
+<button class="tr-btn" type="button">Padrão</button>
+<button class="tr-btn tr-btn--lg" type="button">Densidade baixa</button>
+</div>
+<div class="tr-btn-group">
+<button aria-label="Compartilhar processo" class="tr-btn tr-btn--subtle tr-btn--circle tr-btn--sm" title="Compartilhar processo" type="button"><span aria-hidden="true">↗</span></button>
+<button aria-label="Adicionar membro à equipe" class="tr-btn tr-btn--circle" title="Adicionar membro à equipe" type="button"><span aria-hidden="true">+</span></button>
+<button aria-label="Nova mensagem" class="tr-btn tr-btn--primary tr-btn--circle tr-btn--lg" title="Nova mensagem" type="button"><span aria-hidden="true">✎</span></button>
+<button aria-label="Favorito" aria-pressed="true" class="tr-btn tr-btn--subtle tr-btn--circle" title="Favorito" type="button"><span aria-hidden="true">★</span></button>
+</div>
+<div class="tr-btn-group">
+<div class="tr-split">
+<button class="tr-btn tr-btn--primary" type="button">Publicar agora</button>
+<button aria-expanded="false" aria-haspopup="menu" aria-label="Mais opções de publicação" class="tr-btn tr-btn--primary" type="button"><span aria-hidden="true">▾</span></button>
+</div>
+<button aria-disabled="true" class="tr-btn" type="button"><span aria-hidden="true" class="tr-spinner"></span>Salvando…</button>
+<button class="tr-btn tr-btn--danger" type="button">Excluir projeto</button>
+</div>
+<button class="tr-btn tr-btn--primary tr-btn--block-compact" type="button">Continuar</button>
+</div>
+</div>
+</body>
+</html>

@@ -13,6 +13,7 @@ Plataforma cívica e apartidária para o eleitor ficar de olho nos políticos qu
 | `coletor/` | Motor de dados: busca votações da Câmara e do Senado nas APIs de dados abertos |
 | `db/` | Esquema do banco de dados (Supabase / Postgres) |
 | `docs/` | Decisões de produto, regras de neutralidade e LGPD |
+| `design-system/` | Design system E aí, Eleito? (tokens, CSS, guias e prévias dos componentes) |
 
 ## Primeira versão (MVP)
 
@@ -55,7 +56,7 @@ Abra `site/index.html` no navegador. Os nomes, partidos e votações são fictí
 
 1. Validar o coletor com uma semana real e medir quanto tempo leva para explicar cada votação.
 2. Criar o projeto no Supabase e rodar `db/schema.sql`.
-3. Gerar as frases em linguagem simples (IA + revisão humana) e preencher o e-mail.
+3. Gerar as frases em linguagem simples (IA + revisão humana) e publicar na página Tô de olho e no e-mail.
 4. Conectar o site ao banco e ao login por link mágico.
 5. Lançar a lista de espera antes da posse do novo Congresso (1º/2/2027).
 

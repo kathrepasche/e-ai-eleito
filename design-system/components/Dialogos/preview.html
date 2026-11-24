@@ -1,0 +1,24 @@
+<!-- @dsCard group="Apresentação" height=346 subtitle="Diálogos" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Diálogos</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<div class="tr-stage tr-stage--scrim">
+<div aria-describedby="p-dialogos-demo-desc" aria-labelledby="p-dialogos-demo-title" aria-modal="true" class="tr-dialog" role="alertdialog">
+<h3 id="p-dialogos-demo-title">Excluir o relatório "Vendas de setembro"</h3>
+<p id="p-dialogos-demo-desc">O relatório e os 12 gráficos ligados a ele serão excluídos para todas as pessoas da equipe. Não é possível desfazer esta ação.</p>
+<div class="tr-dialog__actions">
+<button class="tr-btn" type="button">Cancelar</button>
+<button class="tr-btn tr-btn--danger" type="button">Excluir relatório</button>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

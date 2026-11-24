@@ -30,7 +30,7 @@ CAMARA = "https://dadosabertos.camara.leg.br/api/v2"
 SENADO = "https://legis.senado.leg.br/dadosabertos"
 HEADERS = {"Accept": "application/json", "User-Agent": "eaieleito-linguagem/0.1"}
 
-MODELO = "claude-opus-5-5"
+MODELO = "claude-sonnet-5-5"  # decisão da Kathleen (CLAUDE.md, pipeline)
 PROMPT_SISTEMA = (AQUI / "prompt_sistema.md").read_text(encoding="utf-8")
 
 ESQUEMA = {

@@ -1,0 +1,27 @@
+<!-- @dsCard group="Layout e organização" height=276 subtitle="Painéis e split view" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Painéis e split view</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<div class="tr-panes">
+<nav aria-label="Mensagens" class="tr-nav" style="width:auto">
+<a aria-current="page" href="#p-paineis">Prefeitura: protocolo atualizado</a>
+<a href="#p-paineis">Banco Aurora: fatura de outubro</a>
+<a href="#p-paineis">Clínica Vida: consulta confirmada</a>
+</nav>
+<section aria-labelledby="p-paineis-demo-det">
+<h3 class="tr-subtitle" id="p-paineis-demo-det">Seu protocolo foi atualizado</h3>
+<p class="tr-caption">Prefeitura · 16 de outubro de 2026</p>
+<p class="tr-body-sm">O pedido 2026/18342 passou para a etapa de análise. Você será avisado quando houver resposta.</p>
+<div class="tr-btn-group" style="justify-content:flex-end"><button class="tr-btn tr-btn--sm tr-btn--subtle" type="button">Arquivar</button><button class="tr-btn tr-btn--sm tr-btn--primary" type="button">Responder</button></div>
+</section>
+</div>
+</div>
+</body>
+</html>

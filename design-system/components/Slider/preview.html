@@ -1,0 +1,33 @@
+<!-- @dsCard group="Seleção e entrada" height=226 subtitle="Slider" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Slider</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<form class="tr-stack" onsubmit="return false">
+<div class="tr-field">
+<label class="tr-label" for="p-slider-opacidade">Opacidade da camada</label>
+<div class="tr-row">
+<input aria-valuetext="60 por cento" class="tr-slider" id="p-slider-opacidade" list="p-slider-marcas" max="100" min="0" step="5" type="range" value="60"/>
+<output class="tr-mono" for="p-slider-opacidade">60%</output>
+</div>
+<datalist id="p-slider-marcas"><option value="0"></option><option value="25"></option><option value="50"></option><option value="75"></option><option value="100"></option></datalist>
+<span class="tr-hint">De 0% a 100%, em passos de 5</span>
+</div>
+<div class="tr-field">
+<label class="tr-label" for="p-slider-raio">Raio da pesquisa, em quilômetros</label>
+<span class="tr-hint" id="p-slider-raio-hint">Use o controle ou digite um valor de 1 a 50</span>
+<div class="tr-row">
+<input aria-describedby="p-slider-raio-hint" class="tr-slider" id="p-slider-raio" max="50" min="1" step="1" type="range" value="10"/>
+<input aria-label="Raio da pesquisa, em quilômetros" class="tr-input" id="p-slider-raio-num" inputmode="numeric" style="width:72px" type="text" value="10"/>
+</div>
+</div>
+</form>
+</div>
+</body>
+</html>

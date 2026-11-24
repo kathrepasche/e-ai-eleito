@@ -1,0 +1,27 @@
+<!-- @dsCard group="Apresentação" height=280 subtitle="Popovers" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Popovers</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<div class="tr-stack">
+<div><button aria-controls="p-popovers-demo" aria-expanded="true" class="tr-btn" type="button">Lembrete: 15 minutos antes</button></div>
+<div aria-labelledby="p-popovers-demo-title" class="tr-popover" id="p-popovers-demo" role="dialog">
+<form class="tr-stack" onsubmit="return false">
+<strong id="p-popovers-demo-title">Lembrete do evento</strong>
+<div class="tr-field">
+<label class="tr-label" for="p-popovers-demo-sel">Avisar</label>
+<select class="tr-select" id="p-popovers-demo-sel"><option>5 minutos antes</option><option selected="">15 minutos antes</option><option>1 hora antes</option></select>
+</div>
+<div class="tr-dialog__actions"><button class="tr-btn tr-btn--sm" type="button">Cancelar</button><button class="tr-btn tr-btn--primary tr-btn--sm" type="submit">Salvar</button></div>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

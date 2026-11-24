@@ -1,0 +1,44 @@
+<!-- @dsCard group="Conteúdo" height=431 subtitle="Gráficos" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Gráficos</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<section aria-describedby="p-graficos-demo-resumo" aria-labelledby="p-graficos-demo-titulo" class="tr-stack">
+<div>
+<h3 class="tr-subtitle" id="p-graficos-demo-titulo">Pedidos concluídos por canal, setembro de 2026</h3>
+<p class="tr-body-sm" id="p-graficos-demo-resumo">O aplicativo concentrou 46% dos pedidos, mais que a loja física e o telefone somados.</p>
+</div>
+<div aria-hidden="true" class="tr-stack">
+<div class="tr-progress"><span>Aplicativo · 46%</span><div class="tr-progress__track"><div class="tr-progress__bar" style="width:46%"></div></div></div>
+<div class="tr-progress"><span>Site · 31%</span><div class="tr-progress__track"><div class="tr-progress__bar" style="width:31%"></div></div></div>
+<div class="tr-progress"><span>Loja física · 15%</span><div class="tr-progress__track"><div class="tr-progress__bar" style="width:15%"></div></div></div>
+<div class="tr-progress"><span>Telefone · 8%</span><div class="tr-progress__track"><div class="tr-progress__bar" style="width:8%"></div></div></div>
+</div>
+<details class="tr-accordion">
+<summary>Ver dados do gráfico</summary>
+<div class="tr-accordion__panel">
+<div class="tr-table-wrap">
+<table class="tr-table">
+<caption>Pedidos concluídos por canal, setembro de 2026</caption>
+<thead><tr><th scope="col">Canal</th><th class="num" scope="col">Participação (%)</th></tr></thead>
+<tbody>
+<tr><th scope="row">Aplicativo</th><td class="num">46</td></tr>
+<tr><th scope="row">Site</th><td class="num">31</td></tr>
+<tr><th scope="row">Loja física</th><td class="num">15</td></tr>
+<tr><th scope="row">Telefone</th><td class="num">8</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</details>
+<p class="tr-caption">Fonte: sistema de pedidos, dados fechados em 1º de outubro de 2026.</p>
+</section>
+</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!-- @dsCard group="Navegação e busca" height=222 subtitle="Campo de pesquisa" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Campo de pesquisa</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<div class="tr-stack">
+<form aria-label="Pesquisar serviços" class="tr-stack" onsubmit="return false" role="search">
+<label class="tr-label" for="p-campo-busca-destaque">O que você procura?</label>
+<div class="tr-input-wrap" style="max-width:520px">
+<input autocomplete="off" class="tr-input tr-input--feature" enterkeyhint="search" id="p-campo-busca-destaque" name="q" placeholder="Ex.: segunda via de documento" type="search"/>
+<button aria-label="Pesquisar" class="tr-input-action" title="Pesquisar" type="submit"><span aria-hidden="true">⌕</span></button>
+</div>
+</form>
+<form aria-label="Pesquisar processos" class="tr-stack" onsubmit="return false" role="search">
+<label class="tr-label" for="p-campo-busca-q">Pesquisar processos</label>
+<div class="tr-row">
+<div class="tr-search" style="width:340px">
+<span aria-hidden="true" class="tr-search__icon"></span>
+<input autocomplete="off" id="p-campo-busca-q" name="q" placeholder="Número, parte ou assunto" type="search"/>
+</div>
+<button class="tr-btn tr-btn--primary" type="submit">Pesquisar</button>
+</div>
+</form>
+</div>
+</div>
+</body>
+</html>

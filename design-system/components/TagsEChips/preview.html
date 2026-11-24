@@ -1,0 +1,39 @@
+<!-- @dsCard group="Navegação e busca" height=308 subtitle="Tags e chips" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Tags e chips</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<div class="tr-stack">
+<div>
+<p class="tr-label" id="p-tags-filtros">Filtros aplicados</p>
+<div aria-labelledby="p-tags-filtros" class="tr-row" role="list">
+<span class="tr-chip" role="listitem">Tribunal: TJSC <button aria-label="Remover filtro Tribunal: TJSC" type="button">×</button></span>
+<span class="tr-chip" role="listitem">Ano: 2026 <button aria-label="Remover filtro Ano: 2026" type="button">×</button></span>
+<span class="tr-chip" role="listitem">Situação: em andamento <button aria-label="Remover filtro Situação: em andamento" type="button">×</button></span>
+</div>
+</div>
+<div>
+<p class="tr-label" id="p-tags-temas">Temas de interesse</p>
+<div aria-labelledby="p-tags-temas" class="tr-row" role="list">
+<span role="listitem"><button aria-pressed="true" class="tr-chip" type="button"><span aria-hidden="true">✓</span> Contratos</button></span>
+<span role="listitem"><button aria-pressed="false" class="tr-chip" type="button">Licitação</button></span>
+<span role="listitem"><button aria-pressed="true" class="tr-chip" type="button"><span aria-hidden="true">✓</span> Previdência</button></span>
+</div>
+</div>
+<div>
+<p class="tr-label" id="p-tags-assuntos">Assuntos do documento</p>
+<div aria-labelledby="p-tags-assuntos" class="tr-row" role="list">
+<span class="tr-chip" role="listitem">Contratos</span>
+<span class="tr-chip" role="listitem">Prazo recursal</span>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

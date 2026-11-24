@@ -1,0 +1,29 @@
+<!-- @dsCard group="Seleção e entrada" height=391 subtitle="Upload de arquivo" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Upload de arquivo</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<form class="tr-stack" onsubmit="return false">
+<div class="tr-field" style="max-width:480px">
+<label class="tr-label" for="p-upload-docs">Comprovantes de renda</label>
+<span class="tr-hint" id="p-upload-docs-hint">PDF, JPG ou PNG, até 10 megabytes cada. Você pode enviar até 5 arquivos</span>
+<div class="tr-dropzone">
+<span>Arraste os arquivos para cá ou</span>
+<input accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" aria-describedby="p-upload-docs-hint" id="p-upload-docs" multiple="" type="file"/>
+</div>
+</div>
+<ul aria-label="Arquivos escolhidos" class="tr-list" style="max-width:480px">
+<li><span class="tr-list__text"><span class="tr-truncate" tabindex="0" title="holerite-setembro-2026-empresa-xyz-servicos-gerais.pdf">holerite-setembro-2026-empresa-xyz-servicos-gerais.pdf</span><small>248 kB · Enviado</small></span><button class="tr-btn tr-btn--subtle tr-btn--sm" type="button">Remover<span class="tr-visually-hidden"> holerite-setembro-2026-empresa-xyz-servicos-gerais.pdf</span></button></li>
+<li><span class="tr-list__text">extrato-banco.png<span aria-hidden="true" class="tr-progress"><span class="tr-progress__track"><span class="tr-progress__bar" style="width:40%"></span></span></span><small>1,2 MB · Enviando, 40%</small></span><button class="tr-btn tr-btn--subtle tr-btn--sm" type="button">Cancelar<span class="tr-visually-hidden"> envio de extrato-banco.png</span></button></li>
+<li><span class="tr-list__text">planilha-gastos.xlsx<span class="tr-error-msg"><span class="tr-visually-hidden">Erro:</span>O arquivo deve ser PDF, JPG ou PNG</span></span><button class="tr-btn tr-btn--subtle tr-btn--sm" type="button">Remover<span class="tr-visually-hidden"> planilha-gastos.xlsx</span></button></li>
+</ul>
+</form>
+</div>
+</body>
+</html>

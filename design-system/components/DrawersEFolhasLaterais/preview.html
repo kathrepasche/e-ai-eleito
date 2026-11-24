@@ -1,0 +1,27 @@
+<!-- @dsCard group="Apresentação" height=396 subtitle="Drawers e folhas laterais" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Drawers e folhas laterais</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<div class="tr-stage" style="min-height:340px">
+<aside aria-labelledby="p-drawers-demo-title" class="tr-drawer" role="dialog">
+<header><span id="p-drawers-demo-title">Detalhes do pedido 4821</span><button aria-label="Fechar detalhes do pedido" class="tr-btn tr-btn--subtle tr-btn--icon" type="button">✕</button></header>
+<div>
+<dl class="tr-summary">
+<dt>Cliente</dt><dd>Marina Teixeira</dd><dd></dd>
+<dt>Status</dt><dd><span class="tr-badge tr-badge--warning">Em separação</span></dd><dd></dd>
+<dt>Total</dt><dd>R$ 1.240,00</dd><dd></dd>
+</dl>
+</div>
+<footer><div class="tr-dialog__actions" style="width:100%"><button class="tr-btn" type="button">Fechar</button><button class="tr-btn tr-btn--primary" type="button">Editar pedido</button></div></footer>
+</aside>
+</div>
+</div>
+</body>
+</html>

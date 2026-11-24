@@ -1,0 +1,49 @@
+<!-- @dsCard group="Seleção e entrada" height=294 subtitle="Select e dropdown" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Select e dropdown</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<form class="tr-stack" onsubmit="return false">
+<div class="tr-field">
+<label class="tr-label" for="p-selecao-uf">Estado onde você mora</label>
+<select autocomplete="address-level1" class="tr-select" id="p-selecao-uf" style="max-width:280px">
+<option value="">Selecione o estado</option>
+<option>Paraná</option>
+<option>Rio Grande do Sul</option>
+<option>Santa Catarina</option>
+<option>São Paulo</option>
+</select>
+</div>
+<div class="tr-field">
+<label class="tr-label" for="p-selecao-ordem">Ordenar por</label>
+<div class="tr-row">
+<select class="tr-select" id="p-selecao-ordem" style="max-width:220px">
+<option selected="">Mais recentes</option>
+<option>Mais antigos</option>
+<option>Nome, de A a Z</option>
+<option>Nome, de Z a A</option>
+</select>
+<button class="tr-btn" type="submit">Aplicar</button>
+</div>
+</div>
+<div class="tr-field">
+<label class="tr-label" for="p-selecao-vinculo">Vínculo com a empresa</label>
+<span class="tr-error-msg" id="p-selecao-vinculo-erro"><span class="tr-visually-hidden">Erro:</span>Selecione seu vínculo com a empresa</span>
+<select aria-describedby="p-selecao-vinculo-erro" aria-invalid="true" class="tr-select" id="p-selecao-vinculo" style="max-width:280px">
+<option value="">Selecione o vínculo</option>
+<option>Empregado</option>
+<option>Nenhum</option>
+<option>Prestador de serviço</option>
+<option>Sócio</option>
+</select>
+</div>
+</form>
+</div>
+</body>
+</html>
