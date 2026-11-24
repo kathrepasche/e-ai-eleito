@@ -1,0 +1,17 @@
+<!-- @dsCard group="Cívico" height=380 subtitle="Placar de votos" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Placar de votos</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<div class="ee-placar" role="img" aria-label="A favor: 4, contra: 1, abstenção: 1, faltou: 2"><i class="sim" style="width:50%"></i><i class="nao" style="width:12.5%"></i><i class="abst" style="width:12.5%"></i><i class="falta" style="width:25%"></i></div>
+<details class="ee-placar-linha" open><summary><span class="ee-voto ee-voto--sim"><span class="ee-voto__icone" aria-hidden="true"></span></span>Votou a favor<b>4</b></summary><ul><li>Amplia o horário dos postos de saúde (aprovado)</li><li>Aumenta a pena para golpes pelo celular (aprovado)</li></ul></details>
+<details class="ee-placar-linha"><summary><span class="ee-voto ee-voto--nao"><span class="ee-voto__icone" aria-hidden="true"></span></span>Votou contra<b>1</b></summary><ul><li>Regra de transição da aposentadoria de professores</li></ul></details>
+<details class="ee-placar-linha"><summary><span class="ee-voto ee-voto--falta"><span class="ee-voto__icone" aria-hidden="true"></span></span>Faltou<b>2</b></summary><ul><li>Bolsa para estagiários do ensino médio</li></ul></details>
+</div>
+</body>
+</html>

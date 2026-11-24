@@ -1,0 +1,26 @@
+<!-- @dsCard group="Status" height=324 subtitle="Spinner" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Spinner</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<div class="tr-stack">
+<div class="tr-row">
+<button aria-disabled="true" class="tr-btn tr-btn--primary" type="button"><span aria-hidden="true" class="tr-spinner"></span><span class="tr-visually-hidden">Salvando</span></button>
+<span class="tr-caption">Botão Salvar durante o envio</span>
+</div>
+<div role="status"><span class="tr-spinner tr-spinner--lg">Pesquisando pedidos de outubro …</span></div>
+<div aria-busy="true" class="tr-region-busy tr-card">
+<p class="tr-card__title">Saldo das contas</p>
+<p class="tr-card__meta">Conta corrente, poupança e aplicações</p>
+<div class="tr-spinner tr-spinner--lg" role="status">Atualizando saldos …</div>
+</div>
+</div>
+</div>
+</body>
+</html>

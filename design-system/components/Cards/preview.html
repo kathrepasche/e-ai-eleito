@@ -1,0 +1,31 @@
+<!-- @dsCard group="Layout e organização" height=412 subtitle="Cards" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Cards</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<div class="tr-row">
+<section aria-labelledby="p-cards-demo-1" class="tr-card" style="width:260px">
+<div aria-label="Mapa do bairro com a rota da coleta seletiva destacada." class="tr-card__media" role="img"></div>
+<p class="tr-card__meta">Serviços urbanos</p>
+<h3 class="tr-card__title" id="p-cards-demo-1">Coleta seletiva</h3>
+<p class="tr-body-sm">A coleta passa às terças e sextas, a partir das 7 horas.</p>
+<div class="tr-card__footer">
+<button class="tr-btn tr-btn--sm" type="button">Ativar lembrete</button>
+<a class="tr-link tr-body-sm" href="#p-cards">Ver calendário</a>
+</div>
+</section>
+<a class="tr-card tr-card--interactive" href="#p-cards" style="width:260px">
+<p class="tr-card__meta">Impostos</p>
+<span class="tr-card__title">Segunda via do IPTU</span>
+<span class="tr-body-sm">Emita o boleto atualizado com o número do imóvel.</span>
+</a>
+</div>
+</div>
+</body>
+</html>

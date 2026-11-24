@@ -1,0 +1,41 @@
+<!-- @dsCard group="Seleção e entrada" height=342 subtitle="Campo numérico e stepper" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Campo numérico e stepper</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<form class="tr-stack" onsubmit="return false">
+<div class="tr-field">
+<label class="tr-label" for="p-campo-numerico-copias">Número de cópias</label>
+<span class="tr-hint" id="p-campo-numerico-copias-hint">De 1 a 99</span>
+<div aria-labelledby="p-campo-numerico-copias" class="tr-row" role="group">
+<button aria-controls="p-campo-numerico-copias" aria-label="Diminuir número de cópias" class="tr-btn tr-btn--icon" type="button">−</button>
+<input aria-describedby="p-campo-numerico-copias-hint" class="tr-input" id="p-campo-numerico-copias" inputmode="numeric" style="width:72px" type="text" value="2"/>
+<button aria-controls="p-campo-numerico-copias" aria-label="Aumentar número de cópias" class="tr-btn tr-btn--icon" type="button">+</button>
+</div>
+</div>
+<div class="tr-field">
+<label class="tr-label" for="p-campo-numerico-renda">Renda mensal, em reais</label>
+<span class="tr-hint" id="p-campo-numerico-renda-hint">Inclua os centavos, como 2.350,00</span>
+<div class="tr-input-wrap" style="max-width:220px">
+<span aria-hidden="true" class="tr-affix">R$</span>
+<input aria-describedby="p-campo-numerico-renda-hint" class="tr-input" id="p-campo-numerico-renda" inputmode="decimal" type="text"/>
+</div>
+</div>
+<div class="tr-field">
+<label class="tr-label" for="p-campo-numerico-area">Área construída, em metros quadrados</label>
+<span class="tr-error-msg" id="p-campo-numerico-area-erro"><span class="tr-visually-hidden">Erro:</span>A área construída deve ser um número, como 85 ou 85,5</span>
+<div class="tr-input-wrap" style="max-width:180px">
+<input aria-describedby="p-campo-numerico-area-erro" aria-invalid="true" class="tr-input" id="p-campo-numerico-area" inputmode="decimal" type="text" value="85 metros"/>
+<span aria-hidden="true" class="tr-affix">m²</span>
+</div>
+</div>
+</form>
+</div>
+</body>
+</html>

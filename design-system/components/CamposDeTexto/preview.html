@@ -1,0 +1,55 @@
+<!-- @dsCard group="Seleção e entrada" height=690 subtitle="Campos de texto" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Campos de texto</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<form class="tr-stack" onsubmit="return false">
+<div class="tr-field">
+<label class="tr-label" for="p-campos-texto-nome">Nome completo</label>
+<input autocomplete="name" class="tr-input" id="p-campos-texto-nome" spellcheck="false" type="text"/>
+</div>
+<div class="tr-field">
+<label class="tr-label" for="p-campos-texto-cep">CEP</label>
+<span class="tr-hint" id="p-campos-texto-cep-hint">Pode digitar com ou sem hífen</span>
+<input aria-describedby="p-campos-texto-cep-hint" autocomplete="postal-code" class="tr-input" id="p-campos-texto-cep" inputmode="numeric" style="width:136px" type="text"/>
+</div>
+<div class="tr-field">
+<label class="tr-label" for="p-campos-texto-valor">Valor do aluguel, em reais</label>
+<div class="tr-input-wrap" style="max-width:220px">
+<span aria-hidden="true" class="tr-affix">R$</span>
+<input class="tr-input" id="p-campos-texto-valor" inputmode="decimal" type="text"/>
+</div>
+</div>
+<div class="tr-field">
+<label class="tr-label" for="p-campos-texto-cpf">CPF</label>
+<span class="tr-error-msg" id="p-campos-texto-cpf-erro"><span class="tr-visually-hidden">Erro:</span>Digite um CPF com 11 números, como 123.456.789-09</span>
+<input aria-describedby="p-campos-texto-cpf-erro" aria-invalid="true" class="tr-input" id="p-campos-texto-cpf" inputmode="numeric" style="width:200px" type="text" value="123.456"/>
+</div>
+<div class="tr-field">
+<label class="tr-label" for="p-campos-texto-codigo">Código de verificação</label>
+<span class="tr-field-msg tr-field-msg--success" id="p-campos-texto-codigo-msg"><span class="tr-visually-hidden">Sucesso:</span>Código confirmado</span>
+<input aria-describedby="p-campos-texto-codigo-msg" autocomplete="one-time-code" class="tr-input" data-state="success" id="p-campos-texto-codigo" inputmode="numeric" style="width:160px" type="text" value="482 913"/>
+</div>
+<div class="tr-field">
+<label class="tr-label" for="p-campos-texto-email">E-mail</label>
+<span class="tr-field-msg tr-field-msg--warning" id="p-campos-texto-email-msg"><span class="tr-visually-hidden">Alerta:</span>Este e-mail é diferente do que está no seu cadastro</span>
+<input aria-describedby="p-campos-texto-email-msg" autocomplete="email" class="tr-input" data-state="warning" id="p-campos-texto-email" spellcheck="false" type="email" value="ana.souza@exemplo.org"/>
+</div>
+<div class="tr-field">
+<label class="tr-label" for="p-campos-texto-senha">Senha</label>
+<span class="tr-hint" id="p-campos-texto-senha-hint">Pelo menos 8 caracteres</span>
+<div class="tr-input-wrap">
+<input aria-describedby="p-campos-texto-senha-hint" autocapitalize="off" autocomplete="new-password" class="tr-input" id="p-campos-texto-senha" spellcheck="false" type="password"/>
+<button aria-controls="p-campos-texto-senha" class="tr-btn tr-btn--subtle tr-btn--sm" type="button">Mostrar senha</button>
+</div>
+</div>
+</form>
+</div>
+</body>
+</html>

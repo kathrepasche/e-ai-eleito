@@ -1,0 +1,28 @@
+<!-- @dsCard group="Seleção e entrada" height=395 subtitle="Switch" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Switch</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<div class="tr-stack">
+<div aria-labelledby="p-switch-grupo" class="tr-stack" role="group">
+<p class="tr-label" id="p-switch-grupo">Exibição da lista de processos</p>
+<label class="tr-switch"><input checked="" role="switch" type="checkbox"/><span></span>Mostrar processos arquivados</label>
+<label class="tr-switch"><input role="switch" type="checkbox"/><span></span>Modo compacto</label>
+<label class="tr-switch"><input aria-describedby="p-switch-sms-hint" disabled="" role="switch" type="checkbox"/><span></span>Avisos de prazo por SMS</label>
+<span class="tr-hint" id="p-switch-sms-hint">Cadastre um celular em Perfil para ativar</span>
+</div>
+<hr class="tr-divider"/>
+<div class="tr-row">
+<span class="tr-label" id="p-switch-email-nome">Avisos de prazo por e-mail</span>
+<label class="tr-switch"><input aria-labelledby="p-switch-email-nome" checked="" role="switch" type="checkbox"/><span></span><span aria-hidden="true">Ativados</span></label>
+</div>
+</div>
+</div>
+</body>
+</html>

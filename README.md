@@ -9,14 +9,15 @@ Plataforma cívica e apartidária para o eleitor ficar de olho nos políticos qu
 | Pasta | O que tem |
 | --- | --- |
 | `site/` | Protótipo navegável do site (HTML único, dados fictícios) |
-| `email/` | Modelo do e-mail semanal "E aí, eleito?" para o Brevo |
+| `email/` | Modelo do e-mail semanal (não usado no MVP, guardado para o futuro) |
 | `coletor/` | Motor de dados: busca votações da Câmara e do Senado nas APIs de dados abertos |
 | `db/` | Esquema do banco de dados (Supabase / Postgres) |
 | `docs/` | Decisões de produto, regras de neutralidade e LGPD |
+| `design-system/` | Design system E aí, Eleito? (tokens, CSS, guias e prévias dos componentes) |
 
 ## Primeira versão (MVP)
 
-- Canais: **site + e-mail semanal**. Sem WhatsApp e sem SMS nesta fase.
+- Canal: **só o site**. Sem resumo por e-mail, WhatsApp ou SMS nesta fase; o e-mail serve só para login.
 - Cargos acompanhados: deputados federais, senadores e presidente (sugerido, pode ser ocultado).
 - Acesso sem senha, por link mágico enviado por e-mail.
 - Dados oficiais: [Dados Abertos da Câmara](https://dadosabertos.camara.leg.br/swagger/api.html) e [Dados Abertos do Senado](https://www12.senado.leg.br/dados-abertos).
@@ -40,7 +41,7 @@ Abra `site/index.html` no navegador. Os nomes, partidos e votações são fictí
 
 1. Validar o coletor com uma semana real e medir quanto tempo leva para explicar cada votação.
 2. Criar o projeto no Supabase e rodar `db/schema.sql`.
-3. Gerar as frases em linguagem simples (IA + revisão humana) e preencher o e-mail.
+3. Gerar as frases em linguagem simples (IA + revisão humana) e publicar na página Tô de olho.
 4. Conectar o site ao banco e ao login por link mágico.
 5. Lançar a lista de espera antes da posse do novo Congresso (1º/2/2027).
 

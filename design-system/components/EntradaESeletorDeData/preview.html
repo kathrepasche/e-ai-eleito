@@ -1,0 +1,34 @@
+<!-- @dsCard group="Seleção e entrada" height=300 subtitle="Entrada e seletor de data" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Entrada e seletor de data</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<form class="tr-stack" onsubmit="return false">
+<fieldset aria-describedby="p-datas-nasc-hint" class="tr-fieldset">
+<legend>Qual é a sua data de nascimento?</legend>
+<span class="tr-hint" id="p-datas-nasc-hint">Por exemplo, 27 3 1985</span>
+<div class="tr-date">
+<div class="tr-field"><label class="tr-label" for="p-datas-nasc-dia">Dia</label><input autocomplete="bday-day" class="tr-input" id="p-datas-nasc-dia" inputmode="numeric"/></div>
+<div class="tr-field"><label class="tr-label" for="p-datas-nasc-mes">Mês</label><input autocomplete="bday-month" class="tr-input" id="p-datas-nasc-mes" inputmode="numeric"/></div>
+<div class="tr-field"><label class="tr-label" for="p-datas-nasc-ano">Ano</label><input autocomplete="bday-year" class="tr-input" id="p-datas-nasc-ano" inputmode="numeric"/></div>
+</div>
+</fieldset>
+<fieldset aria-describedby="p-datas-emissao-erro" class="tr-fieldset">
+<legend>Quando o documento foi emitido?</legend>
+<span class="tr-error-msg" id="p-datas-emissao-erro"><span class="tr-visually-hidden">Erro:</span>A data de emissão deve incluir um mês</span>
+<div class="tr-date">
+<div class="tr-field"><label class="tr-label" for="p-datas-emissao-dia">Dia</label><input class="tr-input" id="p-datas-emissao-dia" inputmode="numeric" value="14"/></div>
+<div class="tr-field"><label class="tr-label" for="p-datas-emissao-mes">Mês</label><input aria-invalid="true" class="tr-input" id="p-datas-emissao-mes" inputmode="numeric"/></div>
+<div class="tr-field"><label class="tr-label" for="p-datas-emissao-ano">Ano</label><input class="tr-input" id="p-datas-emissao-ano" inputmode="numeric" value="2019"/></div>
+</div>
+</fieldset>
+</form>
+</div>
+</body>
+</html>

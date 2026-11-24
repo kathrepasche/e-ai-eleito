@@ -1,0 +1,63 @@
+<!-- @dsCard group="Layout e organização" height=443 subtitle="Tabelas" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Tabelas</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<div aria-labelledby="p-tabelas-demo-tit" class="tr-table-wrap" role="region" tabindex="0">
+<div class="tr-table-bar">
+<span id="p-tabelas-demo-tit">Solicitações de outubro</span>
+<div class="tr-btn-group">
+<button class="tr-btn tr-btn--subtle tr-btn--sm" type="button">Pesquisar</button>
+<button class="tr-btn tr-btn--subtle tr-btn--sm" type="button">Filtrar</button>
+<button class="tr-btn tr-btn--subtle tr-btn--sm" type="button">Baixar</button>
+<button aria-expanded="false" aria-haspopup="menu" class="tr-btn tr-btn--subtle tr-btn--sm" type="button">Mais ações</button>
+</div>
+</div>
+<div class="tr-table-bar tr-table-bar--context">
+<span role="status">2 linhas selecionadas</span>
+<div class="tr-btn-group">
+<button class="tr-btn tr-btn--sm" type="button">Arquivar</button>
+<button class="tr-btn tr-btn--sm" type="button">Excluir</button>
+</div>
+</div>
+<table aria-labelledby="p-tabelas-demo-tit" class="tr-table">
+<thead>
+<tr>
+<th scope="col"><label class="tr-check" style="min-height:0;padding:0"><input id="p-tabelas-all" type="checkbox"/><span><span class="tr-visually-hidden">Selecionar todas as linhas</span></span></label></th>
+<th scope="col"><span class="tr-visually-hidden">Detalhes</span></th>
+<th aria-sort="ascending" scope="col"><button class="tr-sort" type="button">Protocolo</button></th>
+<th scope="col"><button class="tr-sort" type="button">Situação</button></th>
+<th class="num" scope="col">Valor (R$)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><label class="tr-check" style="min-height:0;padding:0"><input checked="" type="checkbox"/><span><span class="tr-visually-hidden">Selecionar protocolo 1834</span></span></label></td>
+<td><button aria-controls="p-tabelas-exp1" aria-expanded="true" class="tr-btn tr-btn--subtle tr-btn--sm tr-btn--icon" type="button"><span aria-hidden="true">▴</span><span class="tr-visually-hidden">Detalhes do protocolo 1834</span></button></td>
+<th scope="row">2026/1834</th><td>Em análise</td><td class="num">1.250,00</td>
+</tr>
+<tr class="tr-row-expanded" id="p-tabelas-exp1">
+<td colspan="5">Requerente: Maria Souza Lima. Aberto em 2 de outubro de 2026. Última movimentação: documentos conferidos.</td>
+</tr>
+<tr>
+<td><label class="tr-check" style="min-height:0;padding:0"><input checked="" type="checkbox"/><span><span class="tr-visually-hidden">Selecionar protocolo 1851</span></span></label></td>
+<td><button aria-expanded="false" class="tr-btn tr-btn--subtle tr-btn--sm tr-btn--icon" type="button"><span aria-hidden="true">▾</span><span class="tr-visually-hidden">Detalhes do protocolo 1851</span></button></td>
+<th scope="row">2026/1851</th><td>Aguardando documento</td><td class="num">87,50</td>
+</tr>
+<tr>
+<td><label class="tr-check" style="min-height:0;padding:0"><input type="checkbox"/><span><span class="tr-visually-hidden">Selecionar protocolo 1902</span></span></label></td>
+<td><button aria-expanded="false" class="tr-btn tr-btn--subtle tr-btn--sm tr-btn--icon" type="button"><span aria-hidden="true">▾</span><span class="tr-visually-hidden">Detalhes do protocolo 1902</span></button></td>
+<th scope="row">2026/1902</th><td>Concluído</td><td class="num">430,00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</body>
+</html>

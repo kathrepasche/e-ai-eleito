@@ -12,7 +12,7 @@ Identidade visual (canvas): https://claude.ai/artifact/Bn3hd8Rknhce1jXnygiqnp
 - Sem verde/vermelho para votos: mesma cor, formas diferentes.
 
 ## Canais
-- Site + e-mail semanal (Brevo). WhatsApp e SMS avaliados e descartados nesta fase.
+- Só o site. Sem resumo por e-mail por enquanto; e-mail só para login. WhatsApp e SMS avaliados e descartados nesta fase.
 - Acesso sem senha por link mágico; sessão longa; dados no servidor.
 
 ## Cargos

@@ -1,0 +1,29 @@
+<!-- @dsCard group="Status" height=245 subtitle="Indicador de etapas" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Indicador de etapas</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<div class="tr-stack">
+<div>
+<p class="tr-caption">Etapa 3 de 4</p>
+<p class="tr-title-3">Documentos do imóvel</p>
+</div>
+<hr class="tr-divider"/>
+<nav aria-label="Etapas da solicitação">
+<ol class="tr-steps">
+<li data-state="done"><a class="tr-link" href="#p-indicador-etapas">Solicitante<span class="tr-visually-hidden">, concluída</span></a></li>
+<li data-state="warning"><a class="tr-link" href="#p-indicador-etapas">Imóvel<span class="tr-visually-hidden">, pendente</span></a></li>
+<li aria-current="step">Documentos<span class="tr-visually-hidden">, etapa atual</span></li>
+<li>Revisão<span class="tr-visually-hidden">, disponível depois das etapas anteriores</span></li>
+</ol>
+</nav>
+</div>
+</div>
+</body>
+</html>

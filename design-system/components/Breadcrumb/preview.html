@@ -1,0 +1,32 @@
+<!-- @dsCard group="Navegação e busca" height=280 subtitle="Breadcrumb" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Breadcrumb</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<div class="tr-stack">
+<nav aria-label="Breadcrumb" class="tr-breadcrumb">
+<ol>
+<li><a href="#p-breadcrumb">Início</a></li>
+<li><button aria-controls="p-breadcrumb-ocultos" aria-expanded="true" aria-label="Mostrar 3 níveis ocultos" class="tr-btn tr-btn--subtle tr-btn--circle tr-btn--sm" title="Mostrar 3 níveis ocultos" type="button"><span aria-hidden="true">…</span></button></li>
+<li><a href="#p-breadcrumb">Processo 0012345-67</a></li>
+<li><span aria-current="page">Documentos</span></li>
+</ol>
+</nav>
+<div class="tr-popover" id="p-breadcrumb-ocultos">
+<ul class="tr-stack">
+<li><a class="tr-link" href="#p-breadcrumb">Processos</a></li>
+<li><a class="tr-link" href="#p-breadcrumb">Vara cível</a></li>
+<li><a class="tr-link" href="#p-breadcrumb">Em andamento</a></li>
+</ul>
+</div>
+<a class="tr-link" href="#p-breadcrumb"><span aria-hidden="true">‹ </span>Voltar para a lista de processos</a>
+</div>
+</div>
+</body>
+</html>

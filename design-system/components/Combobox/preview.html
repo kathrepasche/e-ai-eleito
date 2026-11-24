@@ -1,0 +1,50 @@
+<!-- @dsCard group="Seleção e entrada" height=619 subtitle="Combobox" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Combobox</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<form class="tr-stack" onsubmit="return false">
+<div class="tr-field">
+<label class="tr-label" for="p-combobox-pais">País de nascimento</label>
+<span class="tr-hint" id="p-combobox-pais-hint">Digite as primeiras letras e escolha na lista</span>
+<input aria-describedby="p-combobox-pais-hint" autocomplete="country-name" class="tr-input" id="p-combobox-pais" list="p-combobox-paises" style="max-width:320px"/>
+<datalist id="p-combobox-paises">
+<option value="Alemanha"></option><option value="Angola"></option><option value="Argentina"></option><option value="Bolívia"></option>
+<option value="Brasil"></option><option value="Cabo Verde"></option><option value="Chile"></option><option value="Colômbia"></option>
+<option value="Espanha"></option><option value="Itália"></option><option value="Japão"></option><option value="Moçambique"></option>
+<option value="Paraguai"></option><option value="Peru"></option><option value="Portugal"></option><option value="Uruguai"></option><option value="Venezuela"></option>
+</datalist>
+</div>
+<div class="tr-field" style="max-width:320px">
+<label class="tr-label" for="p-combobox-mun">Município</label>
+<input aria-activedescendant="p-combobox-mun-op2" aria-autocomplete="list" aria-controls="p-combobox-mun-lista" aria-describedby="p-combobox-mun-status" aria-expanded="true" class="tr-input" id="p-combobox-mun" role="combobox" type="text" value="sa"/>
+<ul aria-label="Municípios" class="tr-list tr-list--interactive" id="p-combobox-mun-lista" role="listbox">
+<li aria-selected="false" id="p-combobox-mun-op1" role="option"><span class="tr-list__text"><span><mark class="tr-mark">Sa</mark>lvador</span><small>Bahia</small></span></li>
+<li aria-selected="true" id="p-combobox-mun-op2" role="option"><span class="tr-list__text"><span><mark class="tr-mark">Sa</mark>nta Maria</span><small>Rio Grande do Sul</small></span></li>
+<li aria-selected="false" id="p-combobox-mun-op3" role="option"><span class="tr-list__text"><span><mark class="tr-mark">Sa</mark>ntos</span><small>São Paulo</small></span></li>
+<li aria-selected="false" id="p-combobox-mun-op4" role="option"><span class="tr-list__text"><span><mark class="tr-mark">Sã</mark>o Paulo</span><small>São Paulo</small></span></li>
+</ul>
+<span class="tr-hint" id="p-combobox-mun-status" role="status">4 resultados</span>
+</div>
+<div class="tr-field">
+<label class="tr-label" for="p-combobox-areas">Áreas de atuação</label>
+<span class="tr-hint" id="p-combobox-areas-hint">Escolha uma ou mais</span>
+<input aria-describedby="p-combobox-areas-hint p-combobox-areas-sel" class="tr-input" id="p-combobox-areas" list="p-combobox-areas-list" style="max-width:320px"/>
+<datalist id="p-combobox-areas-list">
+<option value="Direito civil"></option><option value="Direito do trabalho"></option><option value="Direito penal"></option><option value="Direito tributário"></option>
+</datalist>
+<div aria-label="Selecionadas" class="tr-row" id="p-combobox-areas-sel" role="group">
+<span class="tr-chip">Direito civil <button aria-label="Remover Direito civil" type="button">×</button></span>
+<span class="tr-chip">Direito tributário <button aria-label="Remover Direito tributário" type="button">×</button></span>
+</div>
+</div>
+</form>
+</div>
+</body>
+</html>

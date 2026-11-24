@@ -1,0 +1,32 @@
+<!-- @dsCard group="Navegação e busca" height=208 subtitle="Paginação" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Paginação</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<nav aria-label="Paginação dos resultados" class="tr-stack">
+<div class="tr-pagination">
+<a class="tr-page-btn" href="#p-paginacao">‹ Anterior</a>
+<a aria-label="Página 1" class="tr-page-btn" href="#p-paginacao">1</a>
+<button aria-expanded="false" aria-label="Escolher entre as páginas 2 e 97" class="tr-page-btn" title="Páginas 2 a 97" type="button">…</button>
+<a aria-label="Página 98" class="tr-page-btn" href="#p-paginacao">98</a>
+<a aria-current="page" aria-label="Página 99" class="tr-page-btn" href="#p-paginacao">99</a>
+<a aria-label="Página 100, última página" class="tr-page-btn" href="#p-paginacao">100</a>
+<a class="tr-page-btn" href="#p-paginacao">Próxima ›</a>
+</div>
+<div class="tr-row">
+<label class="tr-label" for="p-paginacao-itens">Itens por página</label>
+<select class="tr-select" id="p-paginacao-itens" style="width:88px"><option>20</option><option>50</option><option>100</option></select>
+<p aria-live="polite" class="tr-body-sm">Mostrando 1.961 a 1.980 de 1.982 processos</p>
+<label class="tr-label" for="p-paginacao-ir">Ir para a página</label>
+<select class="tr-select" id="p-paginacao-ir" style="width:96px"><option>99</option><option>100</option></select>
+</div>
+</nav>
+</div>
+</body>
+</html>

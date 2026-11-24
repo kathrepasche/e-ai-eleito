@@ -101,7 +101,7 @@ textarea{width:100%;min-height:120px;border-radius:12px;border:1px solid var(--m
 <footer class="band"><div class="wrap" style="display:flex;flex-direction:column;gap:6px">
 <p><b style="color:var(--ink)">E aí, Eleito?</b> · Apartidário. Não pedimos seu voto e não vendemos seus dados.</p>
 <p>Fontes: Dados Abertos da Câmara dos Deputados e do Senado Federal.</p>
-<p class="nota">Protótipo: nomes, partidos e votações são fictícios. Nenhum e-mail é enviado.</p>
+<p class="nota">Protótipo: nomes, partidos e votações são fictícios.</p>
 </div></footer>
 <script>
 {
@@ -188,10 +188,10 @@ const silencios=(p,ini,fim)=>{const f=(FALAS[p.id]||[]).filter(x=>x[0]>=ini&&x[0
 const views={
 inicio(){return `<section class="band hero"><div class="wrap">
 <div><h1>Na urna aparece <span class="risca">FIM</span>.<br><span class="amarelo">Pra gente, é só o começo.</span></h1>
-<p class="sub">Escolha os políticos que você quer acompanhar e as pautas que importam pra você. Toda segunda, um e-mail conta o que eles fizeram, e o que deixaram de fazer, em linguagem simples.</p>
+<p class="sub">Escolha os políticos que você quer acompanhar e as pautas que importam pra você. Toda segunda, sua página Tô de olho mostra o que eles fizeram, e o que deixaram de fazer, em linguagem simples.</p>
 <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn gri" href="#cadastro">Quero ficar de olho</a><a class="btn txt" style="color:#F7F5F0" href="#como">Como funciona</a></div></div>
 <div class="pic"><div class="ico">${ICON(0)}</div>
-<div class="mail"><small>Segunda, 8h · para você</small><b>E aí, eleito? Sua semana</b>
+<div class="mail"><small>Tô de olho · nessa semana</small><b>E aí, eleito? Sua semana</b>
 <div class="li">${V.sim.s}<p>Marina Duarte votou sim no horário estendido dos postos de saúde</p></div>
 <div class="li">${V.falta.s}<p>Faltou à votação sobre golpes pelo celular</p></div>
 <div class="li" style="color:#1B1B1F">${V.fala.s}<p>Nenhuma palavra sobre <span class="grifo">segurança</span></p></div></div></div>
@@ -200,7 +200,7 @@ inicio(){return `<section class="band hero"><div class="wrap">
 <div class="steps">
 <div class="card"><h3>Fique de olho</h3><p>Escolha seu estado e os políticos que você quer acompanhar. Pode ser quem você elegeu ou não. Ninguém fica sabendo em quem você votou.</p></div>
 <div class="card"><h3>Escolha suas pautas</h3><p>Saúde, educação, segurança ou todas. O resumo mostra o que eles fizeram sobre cada uma, e também quando ficaram em silêncio.</p></div>
-<div class="card"><h3>Leia em 2 minutos</h3><p>Toda segunda chega um e-mail só seu. No site, a página “Tô de olho” guarda o histórico completo de cada político.</p></div>
+<div class="card"><h3>Leia em 2 minutos</h3><p>Toda segunda, sua página Tô de olho é atualizada. Lá também fica o histórico completo de cada político.</p></div>
 </div></div></section>
 <section class="band" style="background:var(--card);border-block:1px solid var(--line)"><div class="wrap"><h2>Nossas regras</h2>
 <div class="princ">
@@ -219,8 +219,7 @@ inicio(){return `<section class="band hero"><div class="wrap">
 cadastro(){
 if(S.passo===4)return `<section class="band"><div class="col" style="text-align:center;align-items:center">
 <div style="width:120px">${ICON(0)}</div><h1>Pronto, ${S.nome?S.nome.split(' ')[0]:'tá feito'}!</h1>
-<p>Seu primeiro resumo chega na próxima segunda, às 8h, em <b>${esc(S.email)}</b>.</p>
-<p class="nota">No protótipo, nenhum e-mail é enviado.</p>
+<p>Sua página Tô de olho já está pronta e é atualizada toda segunda. Para voltar de qualquer aparelho, entre com <b>${esc(S.email)}</b>.</p>
 <a class="btn pri" href="#semana">Abrir o Tô de olho</a></div></section>`;
 const pct=S.passo*33.3;
 let corpo='';
@@ -238,12 +237,12 @@ corpo=`<h1>O que importa pra você?</h1><p class="vazio">Escolha de 3 a 5 pautas
 <div class="chips">${PAUTAS.map(p=>`<button class="chip" data-pa="${p}" aria-pressed="${S.todas||S.pautas.includes(p)}">${p}</button>`).join('')}</div>
 <p class="nota">${S.todas?'Acompanhando todas as pautas':n<3?`Escolha mais ${3-n}`:`${n} de 5 escolhidas`}</p>
 <div style="display:flex;justify-content:space-between;gap:12px"><button class="btn txt" id="volta">Voltar</button><button class="btn pri" id="prox" ${S.todas||n>=3?'':'disabled'}>Continuar</button></div>`}
-if(S.passo===3)corpo=`<h1>Para onde mandamos seu resumo?</h1><p class="vazio">Um e-mail por semana, toda segunda às 8h. Sem propaganda.</p>
+if(S.passo===3)corpo=`<h1>Guarde sua página Tô de olho</h1><p class="vazio">Seu e-mail serve só para você entrar de qualquer aparelho, sem senha. Não mandamos resumo nem propaganda.</p>
 <form id="f" style="display:flex;flex-direction:column;gap:16px" novalidate>
 <div><label for="nome">Como podemos te chamar? <span class="nota">(opcional)</span></label><input id="nome" type="text" autocomplete="given-name" value="${esc(S.nome)}"></div>
 <div><label for="em">Seu e-mail</label><input id="em" type="email" autocomplete="email" required value="${esc(S.email)}"><p class="nota" id="erro" role="alert" style="color:#B3261E;margin-top:6px"></p></div>
-<label class="check"><input type="checkbox" id="lgpd" required><span>Concordo em receber o resumo semanal e com o uso dos meus dados só para isso, conforme a LGPD. Posso cancelar quando quiser.</span></label>
-<div style="display:flex;justify-content:space-between;gap:12px"><button type="button" class="btn txt" id="volta">Voltar</button><button class="btn pri" type="submit">Começar a receber</button></div></form>`;
+<label class="check"><input type="checkbox" id="lgpd" required><span>Concordo com o uso dos meus dados só para montar minha página, conforme a LGPD. Posso apagar minha conta quando quiser.</span></label>
+<div style="display:flex;justify-content:space-between;gap:12px"><button type="button" class="btn txt" id="volta">Voltar</button><button class="btn pri" type="submit">Criar minha página</button></div></form>`;
 return `<section class="band"><div class="col"><p class="passo">Passo ${S.passo} de 3</p><div class="bar"><i style="width:${pct}%"></i></div>${corpo}</div></section>`},
 
 semana(){
@@ -279,7 +278,7 @@ ${!ok?`<div class="card" style="border-style:dashed"><p class="vazio">Logo, logo
 const vis=secoes.filter(([c])=>!S.ocultos.includes(c));
 return `<div class="cargobar"><div class="wrap chips" style="padding:8px max(5vw,16px)">${vis.map(([c,t,ok])=>`<button class="chip" data-ir="${c}">${t}${ok?` <span class="nota">${S.seg.map(pol).filter(p=>p.c===c).length}</span>`:''}</button>`).join('')}</div></div>
 <section class="band" style="padding-top:20px"><div class="wrap" style="display:flex;flex-direction:column;gap:28px">
-<div class="card" style="flex-direction:row;flex-wrap:wrap;align-items:center;gap:10px;padding:12px 16px"><p style="flex:1 1 240px;font-size:15px">Pautas: <b>${S.todas?'todas':S.pautas.join(', ')}</b>${S.ok?` · resumo em ${esc(S.email)}`:' · sem e-mail cadastrado'}</p><a class="btn sec" style="min-height:44px" href="#preferencias">Mudar preferências</a></div>
+<div class="card" style="flex-direction:row;flex-wrap:wrap;align-items:center;gap:10px;padding:12px 16px"><p style="flex:1 1 240px;font-size:15px">Pautas: <b>${S.todas?'todas':S.pautas.join(', ')}</b> · atualizado toda segunda</p><a class="btn sec" style="min-height:44px" href="#preferencias">Mudar preferências</a></div>
 <div><p class="nota">Fique de olho nessa semana · 16 a 22 de novembro</p><h1>Tô de olho em <span class="grifo">${S.seg.length} polític${S.seg.length===1?'o':'os'}</span></h1>${S.uf?'':'<p class="vazio" style="margin-top:8px"><a href="#cadastro" data-ed="1">Escolha seu estado</a> para ver os políticos de lá.</p>'}</div>
 ${vis.map(sec).join('')}
 ${S.ocultos.length?`<p class="nota">Cargo oculto: ${S.ocultos.map(c=>secoes.find(x=>x[0]===c)[1]).join(', ')} · <button class="btn txt" style="min-height:44px;font-size:13px;padding:0 4px" data-mostrar="1">Mostrar de novo</button></p>`:''}
@@ -374,10 +373,10 @@ return `<section class="band"><div class="col"><h1>Preferências</h1>
 <div class="card"><h3>Você está de olho em</h3><p>${S.seg.length?S.seg.map(pol).map(p=>p.n).join(', '):'Nenhum ainda'}</p><a class="btn sec" style="align-self:flex-start" href="#cadastro" data-ed="1">Mudar de quem estou de olho</a></div>
 ${S.ocultos.length?`<div class="card"><h3>Cargos ocultos</h3><p>Presidente</p><button class="btn sec" style="align-self:flex-start" data-mostrar="1">Mostrar de novo</button></div>`:''}
 <div class="card"><h3>Pautas</h3><p>${S.todas?'Todas as pautas':S.pautas.join(', ')}</p><a class="btn sec" style="align-self:flex-start" href="#cadastro" data-ed="2">Mudar pautas</a></div>
-<div class="card"><h3>Resumo por e-mail</h3><p>${S.ok?`Toda segunda, às 8h, em <b>${esc(S.email)}</b>`:'Nenhum e-mail cadastrado'}</p><a class="btn sec" style="align-self:flex-start" href="#cadastro" data-ed="3">${S.ok?'Mudar e-mail':'Cadastrar e-mail'}</a></div>
+<div class="card"><h3>Seu acesso</h3><p>${S.ok?`Você entra com <b>${esc(S.email)}</b>, sem senha`:'Nenhum e-mail cadastrado'}</p><a class="btn sec" style="align-self:flex-start" href="#cadastro" data-ed="3">${S.ok?'Mudar e-mail':'Cadastrar e-mail'}</a></div>
 <div class="card"><h3>Seus dados</h3><p class="vazio">Guardamos só seu e-mail, estado, quem você acompanha e suas pautas. Nunca em quem você votou.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn sec" id="sair">Sair deste aparelho</button><button class="btn txt" id="apagar">Apagar minha conta</button></div><p class="nota" id="apagarMsg" role="status"></p></div>
 </div></section>`};
-views.entrar=function(){return `<section class="band"><div class="col"><h1>Entrar</h1><p class="vazio">Sem senha: digite seu e-mail e enviamos um link de acesso. É o mesmo link que vem no resumo de toda segunda.</p>
+views.entrar=function(){return `<section class="band"><div class="col"><h1>Entrar</h1><p class="vazio">Sem senha: digite seu e-mail e enviamos um link de acesso.</p>
 <form id="fEntrar" style="display:flex;flex-direction:column;gap:14px" novalidate><div><label for="emE">Seu e-mail</label><input id="emE" type="email" autocomplete="email" required></div><button class="btn pri" type="submit" style="align-self:flex-start">Enviar link de acesso</button><p class="nota" id="msgE" role="status"></p></form>
 <p class="nota">Ainda não tem cadastro? <a href="#cadastro">Comece aqui</a>.</p></div></section>`};
 function vazioSemana(){return `<section class="band"><div class="col" style="align-items:flex-start"><h1>Você ainda não está de olho em ninguém</h1><p class="vazio">Escolha os políticos e as pautas para montar sua semana.</p><a class="btn pri" href="#cadastro">Escolher agora</a></div></section>`}
@@ -417,7 +416,7 @@ app.addEventListener('change',e=>{if(e.target.id==='uf'){S.uf=e.target.value;rer
 app.addEventListener('input',e=>{if(e.target.classList.contains('buscaC')){S.buscaC=e.target.value;const pos=e.target.selectionStart,id=e.target.id;render();const b=document.getElementById(id);b.focus();b.setSelectionRange(pos,pos);return}if(e.target.id==='busca'){S.busca=e.target.value;const pos=e.target.selectionStart;render();const b=document.getElementById('busca');b.focus();b.setSelectionRange(pos,pos)}});
 app.addEventListener('submit',e=>{e.preventDefault();if(e.target.id==='fEntrar'){const v=document.getElementById('emE').value.trim();document.getElementById('msgE').textContent=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)?`Se ${v} estiver cadastrado, o link chega em instantes. No protótipo, nenhum e-mail é enviado.`:'Confira o e-mail: parece que falta algo.';return}const em=document.getElementById('em').value.trim(),lg=document.getElementById('lgpd').checked,er=document.getElementById('erro');
 if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){er.textContent='Confira o e-mail: parece que falta algo.';return}
-if(!lg){er.textContent='Para receber o resumo, marque a concordância com o uso dos dados.';return}
+if(!lg){er.textContent='Para continuar, marque a concordância com o uso dos dados.';return}
 S.email=em;S.nome=document.getElementById('nome').value.trim();S.ok=true;S.passo=4;rerender();scrollTo(0,0)});
 addEventListener('hashchange',()=>{if(location.hash==='#cadastro'&&S.passo===4)S.passo=1;S.filtroP='todas';S.picker=null;render();const c=S.irCobrar&&document.getElementById('cobrar');S.irCobrar=false;if(c)c.scrollIntoView();else scrollTo(0,0)});
 render();

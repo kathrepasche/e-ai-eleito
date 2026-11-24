@@ -1,0 +1,33 @@
+<!-- @dsCard group="Seleção e entrada" height=592 subtitle="Área de texto" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Área de texto</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<form class="tr-stack" onsubmit="return false">
+<div class="tr-field">
+<label class="tr-label" for="p-area-texto-motivo">Descreva o problema</label>
+<span class="tr-hint" id="p-area-texto-motivo-hint">Conte o que aconteceu, quando e onde</span>
+<textarea aria-describedby="p-area-texto-motivo-hint p-area-texto-motivo-count" class="tr-textarea" id="p-area-texto-motivo" rows="5" spellcheck="true"></textarea>
+<span class="tr-count" id="p-area-texto-motivo-count">Você pode digitar até 500 caracteres</span>
+</div>
+<div class="tr-field">
+<label class="tr-label" for="p-area-texto-resumo">Resumo do pedido</label>
+<span class="tr-error-msg" id="p-area-texto-resumo-erro"><span class="tr-visually-hidden">Erro:</span>Resumo deve ter no máximo 200 caracteres</span>
+<textarea aria-describedby="p-area-texto-resumo-erro p-area-texto-resumo-count" aria-invalid="true" class="tr-textarea" id="p-area-texto-resumo" rows="3">Solicito a revisão do cálculo da taxa referente ao mês de setembro, pois o valor cobrado considera um imóvel com área maior do que a registrada na matrícula e não inclui o desconto de pagamento antecipado concedido no ano anterior.</textarea>
+<span class="tr-count tr-error-msg" id="p-area-texto-resumo-count">31 caracteres acima do limite</span>
+</div>
+<div class="tr-field">
+<label class="tr-label" for="p-area-texto-obs">Observações para a equipe</label>
+<textarea aria-describedby="p-area-texto-obs-count" class="tr-textarea" id="p-area-texto-obs" rows="3">Ligar antes das 10 horas.</textarea>
+<span class="tr-count" id="p-area-texto-obs-count">25 caracteres digitados</span>
+</div>
+</form>
+</div>
+</body>
+</html>

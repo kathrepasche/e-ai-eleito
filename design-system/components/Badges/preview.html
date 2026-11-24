@@ -1,0 +1,33 @@
+<!-- @dsCard group="Status" height=355 subtitle="Badges" -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Badges</title>
+<style>
+  html,body{margin:0;background:var(--t-bg);color:var(--t-fg-1);font:400 16px/24px var(--t-font-sans)}
+  .tr-preview{display:grid;gap:var(--sp-400);padding:var(--sp-600);box-sizing:border-box}
+  .tr-preview form{margin:0}
+</style></head>
+<body>
+<div class="tr-preview tr-demo" id="root">
+<div class="tr-stack">
+<div class="tr-row">
+<span class="tr-badge">Rascunho</span>
+<span class="tr-badge tr-badge--info">Em análise</span>
+<span class="tr-badge tr-badge--success">Aprovado</span>
+<span class="tr-badge tr-badge--warning">Pendente</span>
+<span class="tr-badge tr-badge--danger">Recusado</span>
+<span class="tr-badge tr-badge--brand">Beta</span>
+</div>
+<ul class="tr-list">
+<li><span class="tr-list__text">Pedido 4821<small>Marina Teixeira</small></span><span class="tr-badge tr-badge--warning">Em separação</span></li>
+<li><span class="tr-list__text">Pedido 4819<small>Caio Ramos</small></span><span class="tr-badge tr-badge--success">Entregue</span></li>
+</ul>
+<nav aria-label="Exemplo de navegação" class="tr-nav">
+<a aria-current="page" href="#p-badges">Caixa de entrada <span aria-hidden="true" class="tr-badge tr-badge--count">3</span><span class="tr-visually-hidden">, 3 não lidas</span></a>
+<a href="#p-badges" title="1.254 processos novos">Processos <span aria-hidden="true" class="tr-badge tr-badge--count">999+</span><span class="tr-visually-hidden">, 1.254 novos</span></a>
+<a href="#p-badges">Enviados</a>
+</nav>
+</div>
+</div>
+</body>
+</html>
