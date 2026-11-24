@@ -243,6 +243,7 @@ def coleta_senado(inicio, fim):
             "data": v.get("DataSessao"),
             "descricao_oficial": v.get("DescricaoVotacao"),
             "materia": v.get("DescricaoIdentificacaoMateria"),
+            "codigo_materia": v.get("CodigoMateria"),
             "aprovada": RESULTADO_SENADO.get(v.get("Resultado")),
             "secreta": secreta,
             "nominal": bool(votos_raw),

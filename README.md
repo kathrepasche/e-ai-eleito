@@ -32,6 +32,21 @@ python coletor.py --inicio 2026-11-16 --fim 2026-11-22
 
 O resultado vai para `coletor/saida/semana-AAAA-MM-DD.json`.
 
+## Como gerar os textos em linguagem simples
+
+Depois de rodar o coletor:
+
+```bash
+cd linguagem
+pip install -r requirements.txt
+export ANTHROPIC_API_KEY=...   # chave da API do Claude
+python simplificar.py ../coletor/saida/semana-2026-11-16.json
+```
+
+Para cada votação nominal, o script busca a ementa oficial do projeto e pede à IA a frase simples, "o que muda" e os argumentos a favor e contra. Nada é publicado automaticamente: sai `linguagem/saida/revisao-*.md` para uma pessoa conferir e `textos-*.json` com `revisado: false`. As regras de escrita (metodologia pública) estão em `linguagem/prompt_sistema.md`.
+
+Use `--sem-ia` para ver só o contexto que seria enviado, sem gastar com a API.
+
 ## Como ver o protótipo
 
 Abra `site/index.html` no navegador. Os nomes, partidos e votações são fictícios.

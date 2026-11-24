@@ -3,3 +3,4 @@ __pycache__/
 coletor/saida/
 .env
 .DS_Store
+linguagem/saida/
