@@ -45,7 +45,7 @@ O design system **E aí, Eleito?** está em `design-system/` (cópia do publicad
 - Cada componente tem guia em `design-system/components/<Nome>/README.md` e exemplo em `preview.html`.
 - Use só tokens alias (`t-*`, `sp-*`, `r-*`, `e-*`, `c-*`), nunca os globais `g-*` nem cores soltas.
 - Regras da marca e decisões EE1 a EE8: `design-system/11-marca-e-neutralidade.md`.
-- O protótipo `site/index.html` ainda NÃO usa o design system; migrar é uma das primeiras tarefas (ex.: o anel de foco amarelo no tema claro reprova contraste; o do sistema, `t-focus`, passa).
+- O protótipo `site/index.html` usa o design system desde 24/11/2026 (carrega `../design-system/tokens.css` e `components/bundle.css`; o `<style>` da página só tem layout com tokens alias). Prévia privada: https://claude.ai/artifact/B67zivKrNubXZpR65M4Siq (para publicar, copie a página com os caminhos sem `../`). O e-mail (`email/`) ainda não foi migrado.
 
 ## O que existe no repositório
 - `site/index.html` — protótipo completo, HTML único, dados fictícios (Partido A–G, nomes inventados). Rotas por hash: #inicio, #cadastro, #semana (Tô de olho), #perfil-<id>, #cargos, #eleicao, #preferencias, #entrar.
