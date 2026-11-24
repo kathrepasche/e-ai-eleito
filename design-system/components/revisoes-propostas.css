@@ -1,0 +1,70 @@
+/* E aí, Eleito? · revisões propostas ao design system (24/11/2026)
+   Carregue depois de tokens.css e components/bundle.css.
+   Cada bloco diz o porquê. Aprovadas, entram no bundle.css do sistema. */
+
+/* R1 · EE8 (texto corrido nunca abaixo de 16px). Os componentes cívicos estavam em 15px. */
+.ee-politico__item,.ee-silencio,.ee-proposta,.ee-voto,.ee-pauta,.ee-cargos button,.ee-cobrar__contato b{font-size:16px;line-height:24px}
+
+/* R2 · Alvo de toque c-touch (44px). Botão padrão e controle segmentado tinham 40px e 32px. */
+.tr-btn{height:auto;min-height:var(--c-touch)}
+.tr-btn--lg{min-height:var(--c-h-lg)}
+.tr-seg button{height:auto;min-height:var(--c-touch)}
+a.tr-btn{text-decoration:none}
+
+/* R3 · Ícones de interface: Material Symbols Outlined, como manda o README. Sempre com texto ao lado. */
+.ee-ico{font-family:'Material Symbols Outlined';font-weight:400;font-style:normal;font-size:var(--icon-lg);line-height:1;display:inline-block;flex:none;letter-spacing:normal;text-transform:none;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;user-select:none}
+.ee-ico--sm{font-size:var(--icon-md)}
+.ee-ico--xl{font-size:var(--icon-xl)}
+.ee-ico--2xl{font-size:var(--icon-2xl);font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 48}
+.ee-ico--cheio{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+
+/* R4 · Navegação inferior com ícone de verdade (o kit mostrava um quadrado) e item ativo preenchido. */
+.tr-bottom-nav{max-width:none;height:auto;min-height:64px}
+.tr-bottom-nav a{min-height:var(--c-touch);font-size:12px;line-height:16px}
+.tr-bottom-nav a[aria-current="page"] .ee-ico{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+
+/* R5 · NOVO .ee-appbar: barra superior do app no celular (voltar, título, ação). */
+.ee-appbar{display:flex;align-items:center;gap:var(--sp-200);min-height:56px;padding:var(--sp-200) var(--sp-300);background:var(--t-surface-raised);border-bottom:var(--stroke-thin) solid var(--t-border-subtle)}
+.ee-appbar__titulo{flex:1;margin:0;font:700 18px/24px var(--font-display);color:var(--t-fg-1)}
+.ee-appbar .tr-btn--icon{width:var(--c-touch);min-width:var(--c-touch)}
+
+/* R6 · NOVO .ee-escolha: card de político selecionável. É um checkbox de verdade (antes era um botão que mudava de texto). */
+.ee-escolha{position:relative;display:flex;align-items:center;gap:var(--sp-300);min-height:64px;padding:var(--sp-300) var(--sp-400);border:var(--stroke-thin) solid var(--t-border);border-radius:var(--r-lg);background:var(--t-surface-raised);color:var(--t-fg-1);cursor:pointer}
+.ee-escolha input{position:absolute;opacity:0;width:1px;height:1px}
+.ee-escolha__texto{display:grid;flex:1}
+.ee-escolha__nome{font:600 16px/22px var(--font-sans)}
+.ee-escolha__meta{font:400 14px/20px var(--font-sans);color:var(--t-fg-3)}
+.ee-escolha__marca{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;border:var(--stroke-thick) solid var(--t-border-control);color:transparent;flex:none}
+.ee-escolha--marcado,.ee-escolha:has(input:checked){border:var(--stroke-thick) solid var(--t-brand);background:var(--t-brand-subtle)}
+.ee-escolha--marcado .ee-escolha__marca,.ee-escolha:has(input:checked) .ee-escolha__marca{background:var(--t-brand);border-color:var(--t-brand);color:var(--t-on-brand)}
+.ee-escolha:has(input:focus-visible){outline:var(--stroke-thick) solid var(--t-focus);outline-offset:2px}
+
+/* R7 · NOVO .ee-cargo: o que o cargo faz, com ícone, antes e depois de escolher. Ensina sem sair do fluxo. */
+.ee-cargo{display:grid;gap:var(--sp-300);padding:var(--sp-400);border-radius:var(--r-lg);background:var(--t-surface-1);color:var(--t-fg-1)}
+.ee-cargo__topo{display:flex;align-items:center;gap:var(--sp-300)}
+.ee-cargo__ico{display:grid;place-items:center;width:48px;height:48px;border-radius:var(--r-md);background:var(--t-brand-subtle);color:var(--t-brand);flex:none}
+.ee-cargo__nome{margin:0;font:600 20px/28px var(--font-display)}
+.ee-cargo__meta{margin:0;font:400 14px/20px var(--font-sans);color:var(--t-fg-3)}
+.ee-cargo__lista{display:grid;gap:var(--sp-200);margin:0;padding:0;list-style:none;font:400 16px/24px var(--font-sans)}
+.ee-cargo__lista li{display:flex;gap:var(--sp-200);align-items:flex-start}
+.ee-cargo__lista .ee-ico{font-size:var(--icon-md);margin-top:2px;color:var(--t-fg-2)}
+
+/* R8 · NOVO .ee-pauta-tile: pauta em bloco com ícone, para a escolha inicial (chip continua nos filtros). */
+.ee-pauta-tile{position:relative;display:grid;justify-items:start;align-content:space-between;gap:var(--sp-300);min-height:96px;padding:var(--sp-400);border:var(--stroke-thin) solid var(--t-border-control);border-radius:var(--r-lg);background:var(--t-surface-raised);color:var(--t-fg-1);font:600 16px/22px var(--font-sans);text-align:left;cursor:pointer}
+.ee-pauta-tile .ee-ico{color:var(--t-brand)}
+.ee-pauta-tile[aria-pressed="true"]{background:var(--t-fg-1);border-color:var(--t-fg-1);color:var(--t-bg)}
+.ee-pauta-tile[aria-pressed="true"] .ee-ico{color:var(--t-bg)}
+.ee-pauta-tile__ok{position:absolute;top:var(--sp-300);right:var(--sp-300);display:none}
+.ee-pauta-tile[aria-pressed="true"] .ee-pauta-tile__ok{display:inline-block}
+
+/* R9 · NOVO .ee-resposta: resposta da pergunta do Modo eleição como rádio grande (uma escolha só). Ícones neutros, mesmo peso para Sim e Não. */
+.ee-resposta{position:relative;display:flex;align-items:center;gap:var(--sp-300);min-height:56px;padding:0 var(--sp-400);border:var(--stroke-thin) solid var(--t-border-control);border-radius:var(--r-lg);background:var(--t-surface-raised);font:600 16px/22px var(--font-sans);color:var(--t-fg-1);cursor:pointer}
+.ee-resposta input{position:absolute;opacity:0;width:1px;height:1px}
+.ee-resposta--marcada,.ee-resposta:has(input:checked){border:var(--stroke-thick) solid var(--t-brand);background:var(--t-brand-subtle)}
+
+/* R10 · NOVO .ee-resumo: números da semana com ícone (faltas, votações, silêncios). */
+.ee-resumo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--sp-200)}
+.ee-resumo__item{display:grid;gap:var(--sp-100);padding:var(--sp-300);border-radius:var(--r-lg);background:var(--t-surface-raised);border:var(--stroke-thin) solid var(--t-border-subtle)}
+.ee-resumo__item .ee-ico{color:var(--t-brand)}
+.ee-resumo__num{font:700 24px/28px var(--font-display);color:var(--t-fg-1)}
+.ee-resumo__rot{font:400 14px/18px var(--font-sans);color:var(--t-fg-2)}
