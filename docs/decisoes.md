@@ -19,8 +19,9 @@ Identidade visual (canvas): https://claude.ai/artifact/Bn3hd8Rknhce1jXnygiqnp
 - Acesso sem senha por link mágico; sessão longa; dados no servidor.
 
 ## Cargos
-- Deputado federal, senador e presidente (sugerido, pode ser ocultado).
-- Deputado estadual e vereador: só a explicação do cargo, acompanhamento em breve.
+- Todos os cargos no MVP (decisão de 28/11/2026): vereador, prefeito, deputado estadual, governador, deputado federal, senador e presidente (presidente como sugestão).
+- Executivos mostram decisões (sanções, vetos, decretos); legislativos mostram votos e presença, inclusive em audiências e comissões quando a fonte registrar.
+- A cobertura local cresce por cidade e estado, conforme as fontes de dados; a interface avisa onde ainda não há dados.
 
 ## Modo eleição ("Fica ou troca?")
 - Balanço do mandato, formulário com votações reais e comparativo de até 3 nomes.
